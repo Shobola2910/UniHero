@@ -10,16 +10,13 @@ const CommentForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      // Call your API to send the comment to Telegram Bot
       await axios.post("/api/send-comment", { name, telegramUsername, comment });
       alert("Comment submitted successfully!");
       setName("");
       setTelegramUsername("");
       setComment("");
     } catch (error) {
-      console.error("Error submitting comment:", error);
       alert("Failed to submit comment.");
     } finally {
       setIsSubmitting(false);
@@ -28,26 +25,9 @@ const CommentForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        placeholder="Your Name"
-        required
-      />
-      <input
-        type="text"
-        value={telegramUsername}
-        onChange={(e) => setTelegramUsername(e.target.value)}
-        placeholder="Your Telegram Username"
-        required
-      />
-      <textarea
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        placeholder="Your Comment"
-        required
-      />
+      <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" required />
+      <input value={telegramUsername} onChange={(e) => setTelegramUsername(e.target.value)} placeholder="Your Telegram Username" required />
+      <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Your Comment" required />
       <button type="submit" disabled={isSubmitting}>
         {isSubmitting ? "Submitting..." : "Submit Comment"}
       </button>
