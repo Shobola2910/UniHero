@@ -1,7 +1,5 @@
 // pages/contact.js
-
-import { useState } from 'react';
-import CommentForm from '../components/CommentForm'; // Agar CommentForm komponenti mavjud bo'lsa
+import CommentForm from '../components/CommentForm';
 
 export default function Contact() {
   return (
