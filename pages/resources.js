@@ -1,13 +1,11 @@
 // pages/resources.js
-// pages/resources.js
-export default function Resources() {
-  return <div>Resources Page</div>;
-}
 
+export default function Resources() {
+  return (
     <div>
       <h1>Resources</h1>
       <p>Check out the following resources to help you succeed!</p>
-      {/* Add resource links or sections here */}
+      {/* Bu yerga resurslar bo'limini qo'shish mumkin */}
     </div>
   );
 }
