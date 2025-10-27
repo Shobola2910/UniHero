@@ -1,5 +1,6 @@
 // components/CommentForm.js
 import { useState } from 'react';
+import axios from 'axios';
 
 const CommentForm = () => {
   const [name, setName] = useState('');
@@ -12,15 +13,14 @@ const CommentForm = () => {
     setIsSubmitting(true);
 
     try {
-      // API chaqiruvini amalga oshirish
+      // Call the API to send the comment to Telegram
       await axios.post('/api/send-comment', { name, telegramUsername, comment });
-      alert('Izoh muvaffaqiyatli yuborildi!');
+      alert('Comment submitted successfully!');
       setName('');
       setTelegramUsername('');
       setComment('');
     } catch (error) {
-      console.error('Izoh yuborishda xatolik:', error);
-      alert('Izoh yuborishda xatolik yuz berdi.');
+      alert('Failed to submit comment.');
     } finally {
       setIsSubmitting(false);
     }
@@ -32,24 +32,24 @@ const CommentForm = () => {
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Ismingiz"
+        placeholder="Your Name"
         required
       />
       <input
         type="text"
         value={telegramUsername}
         onChange={(e) => setTelegramUsername(e.target.value)}
-        placeholder="Telegram foydalanuvchi nomi"
+        placeholder="Your Telegram Username"
         required
       />
       <textarea
         value={comment}
         onChange={(e) => setComment(e.target.value)}
-        placeholder="Izohingiz"
+        placeholder="Your Comment"
         required
       />
       <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? 'Yuborilmoqda...' : 'Izohni yuborish'}
+        {isSubmitting ? 'Submitting...' : 'Submit Comment'}
       </button>
     </form>
   );
