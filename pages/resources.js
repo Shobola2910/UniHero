@@ -1,6 +1,9 @@
 // pages/resources.js
+// pages/resources.js
 export default function Resources() {
-  return (
+  return <div>Resources Page</div>;
+}
+
     <div>
       <h1>Resources</h1>
       <p>Check out the following resources to help you succeed!</p>
