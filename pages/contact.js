@@ -1,6 +1,6 @@
 // pages/contact.js
 import { useState } from 'react';
-import CommentForm from '../components/CommentForm'; // If you created this component
+import CommentForm from '../components/CommentForm'; // Import your comment form component
 
 export default function Contact() {
   return (
