@@ -1,23 +1,24 @@
 // components/MotivationQuotes.tsx
 
 const quotes = [
-  "The only way to do great work is to love what you do. – Steve Jobs",
-  "Success is not the key to happiness. Happiness is the key to success. – Albert Schweitzer",
-  "Don’t watch the clock; do what it does. Keep going. – Sam Levenson",
-  "The future belongs to those who believe in the beauty of their dreams. – Eleanor Roosevelt",
-  // Add more quotes as needed
+  { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+  { text: "Success is not the key to happiness. Happiness is the key to success.", author: "Albert Schweitzer" },
+  { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+  { text: "The future belongs to those who believe in the beauty of their dreams.", author: "Eleanor Roosevelt" },
+  // Add more quotes here
 ];
 
 const MotivationQuotes = () => {
+  const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
   return (
-    <div className="motivation-quotes">
-      <h3>Motivational Quotes</h3>
-      {quotes.map((quote, index) => (
-        <p key={index}>"{quote}"</p>
-      ))}
+    <div className="motivation-quote">
+      <blockquote>
+        <p>"{randomQuote.text}"</p>
+        <footer>- {randomQuote.author}</footer>
+      </blockquote>
     </div>
   );
 };
 
 export default MotivationQuotes;
-
