@@ -7,6 +7,7 @@ const podcastChannels = [
   { name: "Tim Ferriss", url: "https://www.youtube.com/c/timferriss" },
   { name: "Hurry Slowly", url: "https://www.youtube.com/c/HurrySlowly" },
   { name: "Marie Forleo", url: "https://www.youtube.com/c/MarieForleo" },
+  // Add more YouTube channels here
 ];
 
 const getRandomPodcast = () => {
@@ -20,7 +21,7 @@ const StudyPodcasts = () => {
   return (
     <div className="study-podcasts">
       <h2>Study Podcasts</h2>
-      <p>Listen to a random podcast for study inspiration:</p>
+      <p>Listen to a random podcast:</p>
       <a href={podcast.url} target="_blank" rel="noopener noreferrer">
         {podcast.name}
       </a>
