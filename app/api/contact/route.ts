@@ -2,8 +2,8 @@
 
 import { NextResponse } from 'next/server';
 
-const TELEGRAM_BOT_API_URL = "https://api.telegram.org/botYOUR_BOT_API_KEY/sendMessage";
-const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID"; // Chat ID where the messages will be sent
+const TELEGRAM_BOT_API_URL = "https://api.telegram.org/bot8219416435:AAHlhlp2vPogvuW-3r1b57nQwGE5oTdkPg0/sendMessage";
+const TELEGRAM_CHAT_ID = "7711916897"; // Chat ID where the messages will be sent
 
 // Function to send the message to the Telegram bot
 async function sendToTelegram(name: string, telegramUser: string, comment: string) {
