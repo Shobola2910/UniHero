@@ -1,0 +1,39 @@
+/* styles/Header.css */
+
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background-color: #001B48; /* Dark navy color */
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sticky-header .logo img {
+  width: 50px;
+}
+
+.sticky-header nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.sticky-header nav ul li {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.sticky-header nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+}
+
+.sticky-header nav ul li a:hover {
+  background-color: #02457A; /* Navy Blue */
+}
