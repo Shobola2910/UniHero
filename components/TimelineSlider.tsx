@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
+// The timeline data with images and milestones
 const timelineData = [
   { emoji: "🤖", date: "2024 · Dec", title: "UniHero Bot created", img: "/images/1-unihero-bot-created.png" },
   { emoji: "🧑‍🤝‍🧑", date: "2024 · Oct", title: "2 anonym founders", img: "/images/2-anonym-founders.png" },
@@ -38,4 +39,3 @@ const TimelineSlider = () => {
 };
 
 export default TimelineSlider;
-
