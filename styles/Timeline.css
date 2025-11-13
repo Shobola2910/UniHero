@@ -1,1 +1,35 @@
+/* styles/Timeline.css */
+
+.timeline-slider {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.timeline-item {
+  flex: 0 0 100%;
+  transition: transform 0.5s ease;
+  text-align: center;
+}
+
+.timeline-item img {
+  max-width: 80%;
+  margin-bottom: 20px;
+}
+
+.timeline-item.active {
+  transform: scale(1.1);
+}
+
+.timeline-item p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.timeline-item img {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
