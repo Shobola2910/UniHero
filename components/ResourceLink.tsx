@@ -1,26 +1,21 @@
 // components/ResourceLink.tsx
 
-import Link from 'next/link';
+import React from 'react';
 
-const ResourceLink = ({ label, botLink }) => {
+interface ResourceLinkProps {
+  label: string;
+  botLink: string;
+}
+
+const ResourceLink: React.FC<ResourceLinkProps> = ({ label, botLink }) => {
   return (
     <div className="resource-link">
       <h4>{label}</h4>
-      <Link href={botLink}>
+      <a href={botLink} target="_blank" rel="noopener noreferrer">
         <button>Access {label}</button>
-      </Link>
+      </a>
     </div>
   );
 };
 
-const ResourcesSection = () => {
-  return (
-    <div className="resources-section">
-      <h2>Resources</h2>
-      <ResourceLink label="Assignments" botLink="https://t.me/UniHero_BOT?start=assignments" />
-      <ResourceLink label="Exam Prep" botLink="https://t.me/UniHero_BOT?start=examprep" />
-    </div>
-  );
-};
-
-export default ResourcesSection;
+export default ResourceLink;
