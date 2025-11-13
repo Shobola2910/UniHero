@@ -1,4 +1,4 @@
-```json
+
 {
   "name": "unihero-website",
   "private": true,
@@ -24,6 +24,4 @@
     "vite": "^5.0.8"
   }
 }
-```
 
----
