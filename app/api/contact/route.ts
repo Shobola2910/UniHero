@@ -3,10 +3,10 @@
 import { NextResponse } from 'next/server';
 
 const TELEGRAM_BOT_API_URL = "https://api.telegram.org/bot8219416435:AAHlhlp2vPogvuW-3r1b57nQwGE5oTdkPg0/sendMessage";
-const TELEGRAM_CHAT_ID = "7711916897"; // Chat ID where the messages will be sent
+const TELEGRAM_CHAT_ID = "7711916897"; // Chat ID where the messages will be sent 
 
 async function sendToTelegram(name: string, telegramUser: string, comment: string) {
-  const message = `New comment from UniHero contact form:\n\nFull Name: ${name}\nTelegram User: ${telegramUser}\nComment: ${comment}`;
+  const message = `New message from UniHero contact form:\n\nFull Name: ${name}\nTelegram User: ${telegramUser}\nComment: ${comment}`;
 
   const response = await fetch(TELEGRAM_BOT_API_URL, {
     method: 'POST',
