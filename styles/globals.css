@@ -1,1 +1,24 @@
+/* styles/globals.css */
+
+:root {
+  --darkNavy: #001B48;
+  --navyBlue: #02457A;
+  --brightBlue: #018ABE;
+  --lightBlue: #97CADB;
+  --veryLightBlue: #D6EBEE;
+}
+
+/* Example usage */
+body {
+  background-color: var(--veryLightBlue);
+}
+
+button {
+  background-color: var(--brightBlue);
+  color: white;
+}
+
+h1 {
+  color: var(--darkNavy);
+}
 
