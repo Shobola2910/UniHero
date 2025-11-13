@@ -1,1 +1,62 @@
+/* styles/ContactForm.css */
 
+.contact-form {
+  background-color: #D6EBEE; /* Light blue background */
+  padding: 30px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form form div {
+  margin-bottom: 15px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #02457A; /* Navy Blue */
+}
+
+.contact-form button {
+  background-color: #018ABE; /* Bright Blue */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-form button:hover {
+  background-color: #02457A; /* Darker Blue */
+}
+
+.telegram-links {
+  margin-top: 20px;
+}
+
+.telegram-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.telegram-links li {
+  margin-bottom: 10px;
+}
+
+.telegram-links a {
+  text-decoration: none;
+  color: #018ABE;
+}
+
+.telegram-links a:hover {
+  text-decoration: underline;
+}
