@@ -1,59 +1,22 @@
 // pages/contact.tsx
+import ContactForm from '../components/ContactForm';
 
-import { useState } from 'react';
-
-const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    telegramUser: '',
-    comment: '',
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await response.json();
-    if (data.status === 'success') {
-      alert('Your message has been sent!');
-    } else {
-      alert('There was an error submitting the form.');
-    }
-  };
-
+export default function ContactPage() {
   return (
-    <div className="contact-page">
-      <h2>Contact Us</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Full Name"
-          value={formData.fullName}
-          onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Telegram Username"
-          value={formData.telegramUser}
-          onChange={(e) => setFormData({ ...formData, telegramUser: e.target.value })}
-        />
-        <textarea
-          placeholder="Comment"
-          value={formData.comment}
-          onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-        />
-        <button type="submit">Submit</button>
-      </form>
+    <div className="uh-page">
+      <h1 className="uh-section-title">Contact</h1>
+      <p className="uh-section-sub">
+        Leave your full name, Telegram user and comment — we&apos;ll receive it
+        directly in our UniHero bot.
+      </p>
+
+      <div className="uh-contact-grid">
+        <div className="uh-contact-logo">
+          {/* Bu yerga 3D UniHero icon rasmini qo'yasiz */}
+          <img src="/images/unihero-3d.png" alt="UniHero" />
+        </div>
+        <ContactForm />
+      </div>
     </div>
   );
-};
-
-export default ContactPage;
-
+}
