@@ -1,83 +1,99 @@
 // components/ContactForm.tsx
+import { FormEvent, useState } from 'react';
 
-import { useState } from 'react';
+export default function ContactForm() {
+  const [fullName, setFullName] = useState('');
+  const [telegramUser, setTelegramUser] = useState('');
+  const [comment, setComment] = useState('');
+  const [loading, setLoading] = useState(false);
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    telegramUser: '',
-    comment: '',
-  });
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    if (!fullName || !telegramUser || !comment) return;
 
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-
-    const data = await response.json();
-    if (data.status === 'success') {
-      alert('Your message has been sent!');
-    } else {
-      alert('There was an error submitting the form.');
+    try {
+      setLoading(true);
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ fullName, telegramUser, comment }),
+      });
+      const data = await res.json();
+      if (data.status === 'success') {
+        alert('✅ Your message has been sent!');
+        setFullName('');
+        setTelegramUser('');
+        setComment('');
+      } else {
+        alert('❌ Error: ' + data.message);
+      }
+    } catch (err) {
+      alert('❌ Failed to send. Try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="contact-form">
-      <div className="logo">
-        <img src="/images/unihero-logo.png" alt="UniHero" />
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="fullName">Full Name:</label>
-          <input
-            type="text"
-            id="fullName"
-            placeholder="Enter your full name"
-            value={formData.fullName}
-            onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="telegramUser">Telegram User:</label>
-          <input
-            type="text"
-            id="telegramUser"
-            placeholder="Enter your Telegram username"
-            value={formData.telegramUser}
-            onChange={(e) => setFormData({ ...formData, telegramUser: e.target.value })}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="comment">Comment:</label>
-          <textarea
-            id="comment"
-            placeholder="Your comment"
-            value={formData.comment}
-            onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-            required
-          />
-        </div>
-        <button type="submit">Submit</button>
+    <div className="uh-contact-card">
+      <div className="uh-contact-avatar">U</div>
+      <form onSubmit={handleSubmit} className="uh-contact-fields">
+        <input
+          className="uh-input"
+          placeholder="Full Name"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          required
+        />
+        <input
+          className="uh-input"
+          placeholder="Telegram User (@username)"
+          value={telegramUser}
+          onChange={(e) => setTelegramUser(e.target.value)}
+          required
+        />
+        <textarea
+          className="uh-textarea"
+          placeholder="Comment"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+          required
+        />
+        <button
+          type="submit"
+          className="uh-btn uh-btn-primary"
+          disabled={loading}
+        >
+          {loading ? 'Sending…' : 'Submit'}
+        </button>
       </form>
-      <div className="telegram-links">
-        <h3>Connect with us:</h3>
-        <ul>
-          <li><a href="https://t.me/UniHero_news" target="_blank" rel="noopener noreferrer">📣 UniHero_News</a></li>
-          <li><a href="https://t.me/UniHero_BOT" target="_blank" rel="noopener noreferrer">🤖 UniHero BOT</a></li>
-          <li><a href="https://t.me/Unihero_admin" target="_blank" rel="noopener noreferrer">👨🏻‍💻 Admin</a></li>
-        </ul>
+
+      <div className="uh-contact-footer">
+        <a
+          href="https://t.me/UniHero_news"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="uh-chip-link"
+        >
+          📣 UniHero_News
+        </a>
+        <a
+          href="https://t.me/UniHero_BOT"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="uh-chip-link"
+        >
+          🤖 UniHero BOT
+        </a>
+        <a
+          href="https://t.me/Unihero_admin"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="uh-chip-link"
+        >
+          👨🏻‍💻 Admin
+        </a>
       </div>
     </div>
   );
-};
-
-export default ContactForm;
+}
