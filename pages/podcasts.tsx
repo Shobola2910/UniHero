@@ -1,15 +1,14 @@
 // pages/podcasts.tsx
-
 import StudyPodcasts from '../components/StudyPodcasts';
 
-const PodcastsPage = () => {
+export default function PodcastsPage() {
   return (
-    <div className="podcasts-page">
-      <h2>Study Podcasts</h2>
+    <div className="uh-page">
+      <h1 className="uh-section-title">Study Podcasts</h1>
+      <p className="uh-section-sub">
+        We randomly pick a deep-focus study channel for you.
+      </p>
       <StudyPodcasts />
     </div>
   );
-};
-
-export default PodcastsPage;
-
+}
