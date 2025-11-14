@@ -14,10 +14,10 @@ export default function Navbar() {
         <div className="uh-logo-text">UniHero</div>
       </div>
       <nav className="uh-nav-links">
-        {link("#home", "Home", "🏠")}
-        {link("#about", "About", "💬")}
-        {link("#resources", "Resource", "📚")}
-        {link("#contact", "Contact", "📞")}
+        {link('#home', 'Home', '🏠')}
+        {link('#about', 'About', '💬')}
+        {link('#resources', 'Resource', '📚')}
+        {link('#contact', 'Contact', '📞')}
       </nav>
     </header>
   );
