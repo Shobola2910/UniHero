@@ -1,32 +1,44 @@
 // components/StudyPodcasts.tsx
-
-const podcastChannels = [
-  { name: "Ali Abdaal", url: "https://www.youtube.com/c/aliabdaal" },
-  { name: "Thomas Frank", url: "https://www.youtube.com/c/ThomasFrank" },
-  { name: "Matt D'Avella", url: "https://www.youtube.com/c/MattDAvella" },
-  { name: "Tim Ferriss", url: "https://www.youtube.com/c/timferriss" },
-  { name: "Hurry Slowly", url: "https://www.youtube.com/c/HurrySlowly" },
-  { name: "Marie Forleo", url: "https://www.youtube.com/c/MarieForleo" },
-  // Add more YouTube channels here
+const channels = [
+  { name: 'Ali Abdaal', url: 'https://www.youtube.com/c/aliabdaal' },
+  { name: 'Thomas Frank', url: 'https://www.youtube.com/c/ThomasFrank' },
+  { name: "Matt D'Avella", url: 'https://www.youtube.com/c/MattDAvella' },
+  { name: 'Tim Ferriss', url: 'https://www.youtube.com/c/timferriss' },
+  {
+    name: 'Deep Work Playlist 1',
+    url: 'https://www.youtube.com/playlist?list=PLEITKg6BYjonkVKAPYaHMMa4-4ZU-EEYs',
+  },
+  { name: 'Hurry Slowly', url: 'https://www.youtube.com/c/HurrySlowly' },
+  { name: 'Marie Forleo', url: 'https://www.youtube.com/c/MarieForleo' },
+  {
+    name: 'Deep Work Playlist 2',
+    url: 'https://www.youtube.com/playlist?list=PL27GCkYOrUzvoENAkd1MfXG2NnkdbIJMq',
+  },
+  {
+    name: 'Cal Newport',
+    url: 'https://www.youtube.com/c/CalNewportDeepQuestions',
+  },
+  {
+    name: 'Before Breakfast',
+    url: 'https://www.youtube.com/c/BeforeBreakfast',
+  },
 ];
 
-const getRandomPodcast = () => {
-  const randomIndex = Math.floor(Math.random() * podcastChannels.length);
-  return podcastChannels[randomIndex];
-};
-
-const StudyPodcasts = () => {
-  const podcast = getRandomPodcast();
-
+export default function StudyPodcasts() {
+  const random = channels[Math.floor(Math.random() * channels.length)];
   return (
-    <div className="study-podcasts">
-      <h2>Study Podcasts</h2>
-      <p>Listen to a random podcast:</p>
-      <a href={podcast.url} target="_blank" rel="noopener noreferrer">
-        {podcast.name}
+    <div style={{ textAlign: 'center' }}>
+      <p className="uh-modal-text">
+        Random study channel for you right now:
+      </p>
+      <a
+        href={random.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="uh-btn uh-btn-primary"
+      >
+        ▶️ Start learning with {random.name}
       </a>
     </div>
   );
-};
-
-export default StudyPodcasts;
+}
