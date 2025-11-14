@@ -1,14 +1,14 @@
 // pages/motivation.tsx
-
 import MotivationQuotes from '../components/MotivationQuotes';
 
-const MotivationPage = () => {
+export default function MotivationPage() {
   return (
-    <div className="motivation-page">
-      <h2>Motivational Quotes</h2>
+    <div className="uh-page">
+      <h1 className="uh-section-title">Motivation</h1>
+      <p className="uh-section-sub">
+        Short quotes from famous people to keep you going.
+      </p>
       <MotivationQuotes />
     </div>
   );
-};
-
-export default MotivationPage;
+}
