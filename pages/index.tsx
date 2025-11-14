@@ -1,10 +1,11 @@
 // pages/index.tsx
-import { useState } from 'react';
+import Link from 'next/link';
 import TimelineSlider from '../components/TimelineSlider';
 import WhyUniHero from '../components/WhyUniHero';
 import MotivationQuotes from '../components/MotivationQuotes';
 import StudyPodcasts from '../components/StudyPodcasts';
 import ContactForm from '../components/ContactForm';
+import { useState } from 'react';
 
 type ResourceKind =
   | 'assignments'
@@ -15,7 +16,7 @@ type ResourceKind =
   | 'podcasts'
   | null;
 
-export default function HomePage() {
+export default function LandingPage() {
   const [open, setOpen] = useState<ResourceKind>(null);
 
   return (
@@ -28,9 +29,7 @@ export default function HomePage() {
             <span>For Students, By Students</span>
           </div>
 
-          <h1 className="uh-hero-title">
-            UniHero — For Students, By Students
-          </h1>
+          <h1 className="uh-hero-title">UniHero — For Students, By Students</h1>
 
           <p className="uh-hero-text">
             Practical resources, a helpful community, and simple tools. Learn
@@ -53,22 +52,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ABOUT */}
-      <section id="about" style={{ marginTop: 80 }}>
-        <h1 className="uh-section-title">Our story</h1>
+      {/* ABOUT + TIMELINE */}
+      <section id="about">
+        <h2 className="uh-section-title">Our story</h2>
         <p className="uh-section-sub">
           A small student-run project that turned into a study companion for
           hundreds of learners.
         </p>
-
         <TimelineSlider />
+      </section>
 
+      {/* WHY UNI HERO */}
+      <section>
         <WhyUniHero />
       </section>
 
       {/* RESOURCES */}
-      <section id="resources" style={{ marginTop: 80 }}>
-        <h1 className="uh-section-title">Resources</h1>
+      <section id="resources">
+        <h2 className="uh-section-title">Resources</h2>
         <p className="uh-section-sub">
           All your UniHero tools in one place: assignments, exam prep,
           motivation, study guides and more.
@@ -130,8 +131,8 @@ export default function HomePage() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={{ marginTop: 80, marginBottom: 60 }}>
-        <h1 className="uh-section-title">Contact</h1>
+      <section id="contact">
+        <h2 className="uh-section-title">Contact</h2>
         <p className="uh-section-sub">
           Leave your full name, Telegram user and comment — we&apos;ll receive
           it directly in our UniHero bot.
@@ -139,7 +140,7 @@ export default function HomePage() {
 
         <div className="uh-contact-grid">
           <div className="uh-contact-logo">
-            {/* Shu yerga 3D UniHero logoni qo‘y – nomini rasmga qarab o‘zgartirsa bo‘ladi */}
+            {/* bu yerga 3D logo png qo'yasiz: /public/images/unihero-3d.png */}
             <img src="/images/unihero-3d.png" alt="UniHero" />
           </div>
           <ContactForm />
@@ -210,7 +211,7 @@ export default function HomePage() {
                   Get university study guides, syllabi and key exam outlines.
                 </p>
                 <div className="uh-modal-buttons">
-                  {/* Bu linkni keyin o'zing haqiqiy linkka almashtirasan */}
+                  {/* bu yerga haqiqiy link qo'yasan */}
                   <a
                     href="https://example.com/study-guides"
                     target="_blank"
