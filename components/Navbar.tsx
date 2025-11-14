@@ -1,21 +1,10 @@
 // components/Navbar.tsx
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-
 export default function Navbar() {
-  const router = useRouter();
-
   const link = (href: string, label: string, emoji: string) => (
-    <Link
-      href={href}
-      className={
-        'uh-nav-link' + (router.pathname === href ? ' uh-nav-link--active' : '')
-      }
-      key={href}
-    >
+    <a href={href} className="uh-nav-link" key={href}>
       <span>{emoji}</span>
       <span>{label.toUpperCase()}</span>
-    </Link>
+    </a>
   );
 
   return (
@@ -25,10 +14,10 @@ export default function Navbar() {
         <div className="uh-logo-text">UniHero</div>
       </div>
       <nav className="uh-nav-links">
-        {link('/', 'Home', '🏠')}
-        {link('/about', 'About', '💬')}
-        {link('/resources', 'Resource', '📚')}
-        {link('/contact', 'Contact', '📞')}
+        {link("#home", "Home", "🏠")}
+        {link("#about", "About", "💬")}
+        {link("#resources", "Resource", "📚")}
+        {link("#contact", "Contact", "📞")}
       </nav>
     </header>
   );
