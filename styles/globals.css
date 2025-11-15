@@ -1,553 +1,87 @@
-/* styles/globals.css */
-
-:root {
-  --uh-dark: #001b48;
-  --uh-navy: #02457a;
-  --uh-primary: #018abe;
-  --uh-light: #97cadb;
-  --uh-soft: #d6ebee;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html,
-body {
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background: #013a6b;
-  color: #f5f7fb;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Navbar */
-
-.uh-nav {
-  background: var(--uh-dark);
-  color: #fff;
-  padding: 12px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-}
-
-.uh-nav-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.uh-logo-mark {
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  border: 2px solid #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 20px;
-}
-
-.uh-logo-text {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-
-.uh-nav-links {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.uh-nav-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.35);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background: rgba(0, 0, 0, 0.12);
-}
-
-.uh-nav-link span:first-child {
-  font-size: 1rem;
-}
-
-.uh-nav-link:hover,
-.uh-nav-link--active {
-  background: rgba(255, 255, 255, 0.14);
-}
-
-/* Layout */
-
-.uh-main {
-  min-height: 100vh;
-  background: linear-gradient(#013a6b, #02457a);
-}
-
-.uh-page {
-  max-width: 1100px;
-  margin: 40px auto 64px;
-  padding: 0 24px;
-}
-
-/* Hero (Home) */
-
-.uh-hero-card {
-  background: var(--uh-dark);
-  border-radius: 28px;
-  padding: 28px 32px 32px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-}
-
-.uh-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 999px;
-  padding: 4px 12px;
-  font-size: 0.8rem;
-  margin-bottom: 12px;
-}
-
-.uh-hero-title {
-  font-size: 2.4rem;
-  margin: 0 0 10px;
-}
-
-.uh-hero-text {
-  margin: 0 0 20px;
-  color: rgba(255, 255, 255, 0.82);
-  max-width: 520px;
-}
-
-.uh-hero-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.uh-btn {
-  border-radius: 999px;
-  padding: 10px 20px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.12s ease, box-shadow 0.12s ease,
-    background 0.12s ease;
-}
-
-.uh-btn-primary {
-  background: var(--uh-primary);
-  color: #fff;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-}
-
-.uh-btn-primary:hover {
-  background: #02a4d8;
-  transform: translateY(-1px);
-}
-
-.uh-btn-secondary {
-  background: transparent;
-  color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-.uh-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-/* Sections */
-
-.uh-section-title {
-  font-size: 1.6rem;
-  margin: 32px 0 8px;
-}
-
-.uh-section-sub {
-  margin: 0 0 24px;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Timeline */
+/* === ABOUT TIMELINE === */
 
 .uh-timeline {
+  margin-top: 24px;
+}
+
+.uh-timeline-row {
   display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
 }
 
-.uh-timeline-item {
-  flex: 0 0 260px;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 24px;
-  padding: 10px 10px 16px;
-  filter: blur(1.5px);
-  opacity: 0.5;
-  transition: all 0.25s ease;
+.uh-timeline-card {
+  width: 280px;
+  cursor: pointer;
+  transition: all 0.45s ease;
 }
 
-.uh-timeline-item img {
-  width: 100%;
-  border-radius: 18px;
-  display: block;
-}
-
-.uh-timeline-item--active {
-  flex: 0 0 310px;
-  filter: none;
+.uh-timeline-card--active {
+  transform: scale(1.08);
   opacity: 1;
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
+  filter: none;
+  z-index: 10;
 }
 
-.uh-timeline-caption {
-  text-align: center;
-  margin-top: 8px;
+.uh-timeline-card--side {
+  transform: scale(0.9);
+  opacity: 0.35;
+  filter: blur(2px);
 }
 
-.uh-timeline-title {
-  font-weight: 600;
-}
-
-.uh-timeline-date {
-  margin-top: 4px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
-/* Why students love UniHero */
-
-.uh-why-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 16px;
-  margin-top: 28px;
-}
-
-.uh-why-card {
-  background: rgba(0, 0, 0, 0.22);
-  border-radius: 22px;
-  padding: 16px 18px 18px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-}
-
-.uh-why-card:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
-}
-
-.uh-why-title {
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.uh-why-text {
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-/* Resources page */
-
-.uh-resource-layout {
-  display: grid;
-  grid-template-columns: 1fr 200px 1fr;
-  gap: 24px;
-  align-items: center;
-}
-
-.uh-resource-column {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.uh-resource-pill {
-  background: rgba(0, 0, 0, 0.22);
-  border-radius: 999px;
-  padding: 10px 20px;
-  min-width: 180px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
-  font-weight: 600;
-}
-
-.uh-resource-pill span:last-child {
-  font-size: 1.2rem;
-}
-
-.uh-resource-pill:hover {
-  transform: translateY(-3px);
-}
-
-.uh-resource-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.uh-resource-logo-circle {
-  width: 150px;
-  height: 150px;
-  border-radius: 999px;
-  border: 6px solid #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  font-weight: 700;
-}
-
-/* Modal */
-
-.uh-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  backdrop-filter: blur(4px);
-}
-
-.uh-modal-card {
-  background: var(--uh-dark);
-  padding: 28px 32px 24px;
-  border-radius: 26px;
-  max-width: 420px;
-  width: 90%;
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+.uh-timeline-image-wrapper {
   position: relative;
+  width: 100%;
+  height: 190px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.35);
+}
+
+.uh-timeline-image {
+  object-fit: cover;
+}
+
+.uh-timeline-meta {
+  margin-top: 12px;
   text-align: center;
+  color: #e4f1ff;
 }
 
-.uh-modal-close {
-  position: absolute;
-  right: 14px;
-  top: 10px;
-  font-size: 1.3rem;
-  cursor: pointer;
-}
-
-.uh-modal-title {
-  font-size: 1.4rem;
-  margin-bottom: 10px;
-}
-
-.uh-modal-text {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 20px;
-}
-
-.uh-modal-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-
-/* Motivation quote */
-
-.uh-quote-box {
-  background: #021c3b;
-  border-radius: 24px;
-  padding: 22px 24px;
-  position: relative;
-  border: 2px solid #000;
-}
-
-.uh-quote-text {
-  margin: 0 0 12px;
-}
-
-.uh-quote-author {
-  font-weight: 600;
-}
-
-/* Contact */
-
-.uh-contact-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
-  gap: 28px;
-  align-items: stretch;
-}
-
-.uh-contact-logo {
-  background: radial-gradient(circle at 20% 20%, #39aaf3, #01416f);
-  border-radius: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.uh-contact-logo img {
-  max-width: 80%;
-  height: auto;
-}
-
-.uh-contact-card {
-  background: var(--uh-dark);
-  border-radius: 28px;
-  padding: 24px 26px 20px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.uh-contact-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 999px;
-  border: 3px solid #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: center;
+.uh-timeline-emoji {
+  font-size: 26px;
   margin-bottom: 4px;
 }
 
-.uh-contact-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.uh-timeline-title {
+  font-weight: 700;
 }
 
-.uh-input,
-.uh-textarea {
-  width: 100%;
-  padding: 10px 14px;
+.uh-timeline-date {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* dots / progress */
+.uh-timeline-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.uh-timeline-dot {
+  width: 10px;
+  height: 10px;
   border-radius: 999px;
   border: none;
-  background: rgba(0, 0, 0, 0.3);
-  color: #fff;
-  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
 }
 
-.uh-input::placeholder,
-.uh-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.uh-textarea {
-  border-radius: 18px;
-  min-height: 120px;
-  resize: vertical;
-  padding-top: 12px;
-}
-
-.uh-contact-footer {
-  margin-top: 10px;
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.uh-chip-link {
-  background: rgba(0, 0, 0, 0.35);
-  border-radius: 999px;
-  padding: 6px 14px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.85rem;
-}
-
-/* News gate overlay */
-
-.uh-news-gate-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 3000;
-  backdrop-filter: blur(6px);
-}
-
-.uh-news-gate-card {
-  background: var(--uh-dark);
-  padding: 26px 28px 22px;
-  border-radius: 26px;
-  max-width: 420px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.65);
-}
-
-.uh-news-gate-title {
-  font-size: 1.4rem;
-  margin-bottom: 8px;
-}
-
-.uh-news-gate-text {
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 20px;
-}
-
-/* Responsive */
-
-@media (max-width: 900px) {
-  .uh-resource-layout {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-
-  .uh-resource-column {
-    align-items: center;
-  }
-
-  .uh-resource-logo-circle {
-    margin: 10px 0 18px;
-  }
-
-  .uh-contact-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  .uh-nav {
-    padding: 10px 16px;
-  }
-
-  .uh-page {
-    margin: 24px auto 48px;
-  }
-
-  .uh-hero-title {
-    font-size: 1.9rem;
-  }
+.uh-timeline-dot--active {
+  width: 28px;
+  background: #01a8be;
 }
