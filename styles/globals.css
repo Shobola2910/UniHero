@@ -458,8 +458,9 @@ button {
 }
 
 .uh-resources-logo {
-  width: 130px;
+  width: 160px;       /* logoni biroz kattalashtirdik */
   height: auto;
+  border-radius: 50%; /* kvadrat rasmni ham dumaloq qilib kesib beradi */
 }
 
 /* ====== CONTACT FORM ====== */
