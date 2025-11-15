@@ -63,7 +63,7 @@ export default function HomePage() {
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!fullName || !telegramUser || !comment) {
-      alert("Iltimos, barcha maydonlarni to‘ldiring 🙂");
+      alert("Please fill in all fields 🙂");
       return;
     }
 
@@ -76,23 +76,23 @@ export default function HomePage() {
       });
 
       if (!res.ok) {
-        throw new Error("Server xatosi");
+        throw new Error("Server Error❗️");
       }
 
       setFullName("");
       setTelegramUser("");
       setComment("");
-      alert("Xabaringiz muvaffaqiyatli yuborildi! ✅");
+      alert("Your message has been sent successfully! ✅");
     } catch (err) {
       console.error(err);
-      alert("Xabar yuborishda xatolik yuz berdi. Keyinroq urinib ko‘ring.");
+      alert("There was an error sending the message. Please try again later.");
     } finally {
       setSending(false);
     }
   };
 
   // Timeline kartalarining classini hisoblash (chap / o‘rta / o‘ng / yashirin)
-    const getTimelineItemClass = (index: number) => {
+  const getTimelineItemClass = (index: number) => {
     if (index === activeTimeline) {
       return "uh-timeline-item uh-timeline-item--center";
     }
@@ -112,7 +112,6 @@ export default function HomePage() {
     return "uh-timeline-item uh-timeline-item--hidden";
   };
 
-
   return (
     <>
       <Head>
@@ -128,7 +127,6 @@ export default function HomePage() {
         <header className="uh-navbar">
           <div className="uh-navbar-inner">
             <div className="uh-logo-wrap">
-              {/* LOGO RASMI – shu faylni public/images ichiga qo‘ygan bo‘lishingiz kerak */}
               <img
                 src="/images/unihero-logo-full.png"
                 alt="UniHero logo"
@@ -172,8 +170,8 @@ export default function HomePage() {
               </h1>
 
               <p className="uh-hero-text">
-                Practical resources, a helpful community, and simple tools.
-                Learn smarter with study guides, templates and quick support.
+                Practical resources, a helpful community, and simple tools. Learn
+                smarter with study guides, templates and quick support.
               </p>
 
               <div className="uh-hero-actions">
@@ -202,36 +200,34 @@ export default function HomePage() {
               </p>
             </div>
 
+            {/* TIMELINE */}
             <div className="uh-timeline">
-              <div className="uh-timeline-cards">
+              <div className="uh-timeline-items-row">
                 {timelineItems.map((item, idx) => (
-                  <div key={item.title} className={getTimelineCardClass(idx)}>
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      className="uh-timeline-img"
-                    />
-                    <div className="uh-timeline-caption">
-                      <div className="uh-timeline-emoji">{item.emoji}</div>
-                      <div className="uh-timeline-title">{item.title}</div>
-                      <div className="uh-timeline-date">{item.date}</div>
+                  <div
+                    key={item.title}
+                    className={getTimelineItemClass(idx)}
+                    onClick={() => setActiveTimeline(idx)}
+                  >
+                    <div className="uh-timeline-card">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="uh-timeline-img"
+                      />
+                    </div>
+
+                    <div className="uh-timeline-meta">
+                      <div className="uh-timeline-line" />
+                      <div className="uh-timeline-meta-title">
+                        <span className="uh-timeline-meta-emoji">
+                          {item.emoji}
+                        </span>
+                        <span>{item.title}</span>
+                      </div>
+                      <div className="uh-timeline-meta-date">{item.date}</div>
                     </div>
                   </div>
-                ))}
-              </div>
-
-              <div className="uh-timeline-track" />
-
-              <div className="uh-timeline-dots">
-                {timelineItems.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    className={
-                      idx === activeTimeline ? "uh-dot uh-dot--active" : "uh-dot"
-                    }
-                    onClick={() => setActiveTimeline(idx)}
-                  />
                 ))}
               </div>
             </div>
@@ -273,7 +269,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          {/* RESOURCES – hozircha faqat sarlavha (keyingi bosqichda modal va boshqasini qo‘shamiz) */}
+          {/* RESOURCES */}
           <section id="resources" className="uh-section">
             <div className="uh-section-header">
               <h2>Resources</h2>
@@ -282,8 +278,7 @@ export default function HomePage() {
                 motivation, study guides and more.
               </p>
             </div>
-
-            {/* Bu yerda keyinroq design + modallarni qo‘shamiz */}
+            {/* Keyingi bosqichda bu yerga modallar va tugmalarni qo‘shamiz */}
           </section>
 
           {/* CONTACT */}
