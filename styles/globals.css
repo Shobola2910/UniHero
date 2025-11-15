@@ -483,10 +483,11 @@ button {
 .uh-resource-label {
   font-weight: 600;
   font-size: 15px;
+  color: #ffffff
 }
 
 .uh-resource-emoji {
-  font-size: 20px;
+  font-size: 40px;
 }
 
 .uh-resources-center {
