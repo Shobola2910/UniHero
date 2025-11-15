@@ -127,7 +127,7 @@ export default function HomePage() {
   const [comment, setComment] = useState("");
   const [sending, setSending] = useState(false);
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!fullName || !telegramUser || !comment) {
       alert("Please fill in all fields 🙂");
@@ -231,10 +231,7 @@ export default function HomePage() {
     ctaLabel?: string,
     ctaOnClick?: () => void
   ) => (
-    <div
-      className="uh-resources-modal-backdrop"
-      onClick={closeResourceModal}
-    >
+    <div className="uh-resources-modal-backdrop" onClick={closeResourceModal}>
       <div
         className="uh-resources-modal"
         onClick={(e) => e.stopPropagation()}
@@ -470,19 +467,19 @@ export default function HomePage() {
 
             <nav className="uh-nav-links">
               <a href="#hero" className="uh-nav-pill">
-                <span className="uh-nav-icon"></span>
+                <span className="uh-nav-icon" />
                 <span>HOME</span>
               </a>
               <a href="#about" className="uh-nav-pill">
-                <span className="uh-nav-icon"></span>
+                <span className="uh-nav-icon" />
                 <span>ABOUT</span>
               </a>
               <a href="#resources" className="uh-nav-pill">
-                <span className="uh-nav-icon"></span>
+                <span className="uh-nav-icon" />
                 <span>RESOURCE</span>
               </a>
               <a href="#contact" className="uh-nav-pill">
-                <span className="uh-nav-icon"></span>
+                <span className="uh-nav-icon" />
                 <span>CONTACT</span>
               </a>
             </nav>
@@ -749,7 +746,7 @@ export default function HomePage() {
               <div className="uh-contact-illustration">
                 <div className="uh-contact-illustration-inner">
                   <img
-                    src="/images/contact/unihero-contact-main.png" // 3-rasmni shu nom bilan saqla
+                    src="/images/contact/unihero-contact-main.png"
                     alt="UniHero contact"
                     className="uh-contact-illustration-img"
                   />
@@ -761,7 +758,7 @@ export default function HomePage() {
                 <div className="uh-contact-avatar">
                   <div className="uh-contact-avatar-circle">
                     <img
-                      src="/logo-white.webp"
+                      src="/logo-white.png"
                       alt="UniHero"
                       className="uh-contact-avatar-img"
                     />
