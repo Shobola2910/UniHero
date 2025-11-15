@@ -42,8 +42,60 @@ const timelineItems: TimelineItem[] = [
   },
 ];
 
+type ResourceKey =
+  | "assignments"
+  | "motivation"
+  | "hub"
+  | "exam"
+  | "guides"
+  | "podcasts";
+
+const resourceItems: Record<
+  ResourceKey,
+  { label: string; emoji: string; description: string }
+> = {
+  assignments: {
+    label: "Assignments",
+    emoji: "📑",
+    description:
+      "Upload or track your university assignments in one place. Get reminders and simple checklists.",
+  },
+  motivation: {
+    label: "Motivation",
+    emoji: "🚀",
+    description:
+      "Short boosts, success stories and gentle reminders to keep you going throughout the semester.",
+  },
+  hub: {
+    label: "UniHero Hub",
+    emoji: "📨",
+    description:
+      "Main UniHero space: announcements, links, quick tools and everything connected to the bot.",
+  },
+  exam: {
+    label: "Exam Prep",
+    emoji: "📝",
+    description:
+      "Past papers, mock questions and tips to make exam prep faster and less stressful.",
+  },
+  guides: {
+    label: "Study Guides",
+    emoji: "📖",
+    description:
+      "Step-by-step notes, templates and guides that are aligned with what students actually need.",
+  },
+  podcasts: {
+    label: "Study Podcasts",
+    emoji: "🎧",
+    description:
+      "Light study podcasts you can listen to on the way to uni, during walks or while doing chores.",
+  },
+};
+
 export default function HomePage() {
   const [activeTimeline, setActiveTimeline] = useState<number>(1);
+  const [activeResource, setActiveResource] =
+    useState<ResourceKey>("assignments");
 
   // 7 sekundda bir timeline slayderi aylanib turadi
   useEffect(() => {
@@ -282,24 +334,33 @@ export default function HomePage() {
             <div className="uh-resources">
               {/* Chap tomondagi 3 ta pill */}
               <div className="uh-resources-col">
-                <button type="button" className="uh-resource-pill">
-                  <span className="uh-resource-label">Assignments</span>
-                  <span className="uh-resource-emoji">📑</span>
-                </button>
-                <button type="button" className="uh-resource-pill">
-                  <span className="uh-resource-label">Motivation</span>
-                  <span className="uh-resource-emoji">🚀</span>
-                </button>
-                <button type="button" className="uh-resource-pill">
-                  <span className="uh-resource-label">UniHero Hub</span>
-                  <span className="uh-resource-emoji">📨</span>
-                </button>
+                {(["assignments", "motivation", "hub"] as ResourceKey[]).map(
+                  (key) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => setActiveResource(key)}
+                      className={
+                        "uh-resource-pill" +
+                        (activeResource === key
+                          ? " uh-resource-pill--active"
+                          : "")
+                      }
+                    >
+                      <span className="uh-resource-label">
+                        {resourceItems[key].label}
+                      </span>
+                      <span className="uh-resource-emoji">
+                        {resourceItems[key].emoji}
+                      </span>
+                    </button>
+                  )
+                )}
               </div>
 
               {/* Markazdagi logo */}
               <div className="uh-resources-center">
                 <div className="uh-resources-logo-circle">
-                  {/* Save image as /public/images/unihero-center.png */}
                   <img
                     src="/images/unihero-center.png"
                     alt="UniHero"
@@ -310,19 +371,50 @@ export default function HomePage() {
 
               {/* O‘ng tomondagi 3 ta pill */}
               <div className="uh-resources-col">
-                <button type="button" className="uh-resource-pill">
-                  <span className="uh-resource-label">Exam Prep</span>
-                  <span className="uh-resource-emoji">📝</span>
-                </button>
-                <button type="button" className="uh-resource-pill">
-                  <span className="uh-resource-label">Study Guides</span>
-                  <span className="uh-resource-emoji">📖</span>
-                </button>
-                <button type="button" className="uh-resource-pill">
-                  <span className="uh-resource-label">Study Podcasts</span>
-                  <span className="uh-resource-emoji">🎧</span>
-                </button>
+                {(["exam", "guides", "podcasts"] as ResourceKey[]).map(
+                  (key) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => setActiveResource(key)}
+                      className={
+                        "uh-resource-pill" +
+                        (activeResource === key
+                          ? " uh-resource-pill--active"
+                          : "")
+                      }
+                    >
+                      <span className="uh-resource-label">
+                        {resourceItems[key].label}
+                      </span>
+                      <span className="uh-resource-emoji">
+                        {resourceItems[key].emoji}
+                      </span>
+                    </button>
+                  )
+                )}
               </div>
+            </div>
+
+            {/* Pastdagi description + CTA */}
+            <div className="uh-resources-detail">
+              <div className="uh-resources-detail-title">
+                <span className="uh-resources-detail-emoji">
+                  {resourceItems[activeResource].emoji}
+                </span>
+                <span>{resourceItems[activeResource].label}</span>
+              </div>
+              <p className="uh-resources-detail-text">
+                {resourceItems[activeResource].description}
+              </p>
+              <a
+                href="https://t.me/UniHero_BOT"
+                target="_blank"
+                rel="noreferrer"
+                className="uh-secondary-btn uh-resources-detail-cta"
+              >
+                Open in UniHero BOT
+              </a>
             </div>
           </section>
 
