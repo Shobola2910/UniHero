@@ -299,9 +299,9 @@ export default function HomePage() {
               {/* Markazdagi logo */}
               <div className="uh-resources-center">
                 <div className="uh-resources-logo-circle">
-                  {/* 3-rasmni /public/images/unihero-mark.png nomi bilan qo‘yib ishlatsang bo‘ladi */}
+                  {/* Save image as /public/images/unihero-center.png */}
                   <img
-                    src="/images/unihero-mark.png"
+                    src="/images/unihero-center.png"
                     alt="UniHero"
                     className="uh-resources-logo"
                   />
