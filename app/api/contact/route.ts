@@ -1,75 +1,57 @@
 // app/api/contact/route.ts
-import { NextResponse } from 'next/server';
+import { NextResponse } from "next/server";
 
-// ⚠️ Diqqat: odatda token ENV orqali yashirin saqlanadi,
-// lekin hozir senga qulay bo‘lishi uchun to‘g‘ridan-to‘g‘ri yozib qo‘ydik.
 const TELEGRAM_BOT_API_URL =
-  'https://api.telegram.org/bot8219416435:AAHlhlp2vPogvuW-3r1b57nQwGE5oTdkPg0/sendMessage';
+  "https://api.telegram.org/bot8219416435:AAHlhlp2vPogvuW-3r1b57nQwGE5oTdkPg0/sendMessage";
 
-const TELEGRAM_CHAT_ID = '7711916897'; // xabar keladigan chat ID
-
-type ContactBody = {
-  fullName?: string;
-  telegramUser?: string;
-  comment?: string;
-};
+const TELEGRAM_CHAT_ID = "7711916897"; // bu yerga o'zingning chat ID'ing qo'yilgan
 
 export async function POST(request: Request) {
-  let body: ContactBody;
-
   try {
-    body = (await request.json()) as ContactBody;
-  } catch {
-    return NextResponse.json(
-      { status: 'error', message: 'Invalid JSON body.' },
-      { status: 400 }
-    );
-  }
+    const { fullName, telegramUser, comment } = await request.json();
 
-  const { fullName, telegramUser, comment } = body;
+    const text =
+      "📨 Yangi UniHero contact so'rovi\n\n" +
+      `👤 Full name: ${fullName || "-"}\n` +
+      `💬 Telegram: ${telegramUser || "-"}\n` +
+      `📝 Comment:\n${comment || "-"}`;
 
-  if (!fullName || !telegramUser || !comment) {
-    return NextResponse.json(
-      { status: 'error', message: 'All fields are required.' },
-      { status: 400 }
-    );
-  }
-
-  const text =
-    `New UniHero contact:\n\n` +
-    `Full name: ${fullName}\n` +
-    `Telegram user: ${telegramUser}\n` +
-    `Comment:\n${comment}`;
-
-  try {
-    const res = await fetch(TELEGRAM_BOT_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const telegramResponse = await fetch(TELEGRAM_BOT_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text,
+        parse_mode: "HTML",
       }),
     });
 
-    if (!res.ok) {
-      const errText = await res.text();
+    if (!telegramResponse.ok) {
+      const errorText = await telegramResponse.text();
+      console.error(
+        "Telegram API xatosi:",
+        telegramResponse.status,
+        errorText
+      );
       return NextResponse.json(
-        {
-          status: 'error',
-          message: 'Telegram API error: ' + errText,
-        },
+        { ok: false, error: "Telegramga yuborishda xato" },
         { status: 500 }
       );
     }
 
-    return NextResponse.json(
-      { status: 'success', message: 'Sent to Telegram.' },
-      { status: 200 }
-    );
+    return NextResponse.json({ ok: true });
   } catch (error) {
+    console.error("Contact API xatosi:", error);
     return NextResponse.json(
-      { status: 'error', message: 'Failed to send to Telegram.' },
+      { ok: false, error: "Server xatosi" },
       { status: 500 }
     );
   }
+}
+
+export function GET() {
+  return NextResponse.json({
+    ok: true,
+    message: "Contact uchun POST so'rov yuboring.",
+  });
 }
