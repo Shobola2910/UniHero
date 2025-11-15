@@ -1,25 +1,32 @@
-
+// app/api/contact/route.ts
 import { NextResponse } from 'next/server';
 
-const TELEGRAM_BOT_API_URL = "https://api.telegram.org/bot8219416435:AAHlhlp2vPogvuW-3r1b57nQwGE5oTdkPg0/sendMessage";
-const TELEGRAM_CHAT_ID = "7711916897"; // Chat ID where the messages will be sent 
+// ⚠️ Diqqat: odatda token ENV orqali yashirin saqlanadi,
+// lekin hozir senga qulay bo‘lishi uchun to‘g‘ridan-to‘g‘ri yozib qo‘ydik.
+const TELEGRAM_BOT_API_URL =
+  'https://api.telegram.org/bot8219416435:AAHlhlp2vPogvuW-3r1b57nQwGE5oTdkPg0/sendMessage';
 
-const API_URL = BOT_TOKEN
-  ? `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`
-  : '';
+const TELEGRAM_CHAT_ID = '7711916897'; // xabar keladigan chat ID
+
+type ContactBody = {
+  fullName?: string;
+  telegramUser?: string;
+  comment?: string;
+};
 
 export async function POST(request: Request) {
-  if (!BOT_TOKEN || !CHAT_ID) {
+  let body: ContactBody;
+
+  try {
+    body = (await request.json()) as ContactBody;
+  } catch {
     return NextResponse.json(
-      {
-        status: 'error',
-        message: 'Bot token or chat id is not configured on the server.',
-      },
-      { status: 500 }
+      { status: 'error', message: 'Invalid JSON body.' },
+      { status: 400 }
     );
   }
 
-  const { fullName, telegramUser, comment } = await request.json();
+  const { fullName, telegramUser, comment } = body;
 
   if (!fullName || !telegramUser || !comment) {
     return NextResponse.json(
@@ -35,17 +42,31 @@ export async function POST(request: Request) {
     `Comment:\n${comment}`;
 
   try {
-    await fetch(API_URL, {
+    const res = await fetch(TELEGRAM_BOT_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chat_id: CHAT_ID, text }),
+      body: JSON.stringify({
+        chat_id: TELEGRAM_CHAT_ID,
+        text,
+      }),
     });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      return NextResponse.json(
+        {
+          status: 'error',
+          message: 'Telegram API error: ' + errText,
+        },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { status: 'success', message: 'Sent to Telegram.' },
       { status: 200 }
     );
-  } catch (err) {
+  } catch (error) {
     return NextResponse.json(
       { status: 'error', message: 'Failed to send to Telegram.' },
       { status: 500 }
