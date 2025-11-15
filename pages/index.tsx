@@ -745,36 +745,68 @@ export default function HomePage() {
               </p>
             </div>
 
-            <form className="uh-contact-form" onSubmit={handleContactSubmit}>
-              <div className="uh-contact-row">
-                <input
-                  className="uh-input"
-                  placeholder="Full Name"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                />
-                <input
-                  className="uh-input"
-                  placeholder="Telegram Username"
-                  value={telegramUser}
-                  onChange={(e) => setTelegramUser(e.target.value)}
-                />
+            <div className="uh-contact-layout">
+              {/* Chap – katta logo card */}
+              <div className="uh-contact-left">
+                <div className="uh-contact-logo-card">
+                  <img
+                    src="/images/contact/unihero-contact-main.png" // 3-rasmni shu nom bilan saqla
+                    alt="UniHero contact"
+                    className="uh-contact-logo-img"
+                  />
+                </div>
               </div>
-              <textarea
-                className="uh-textarea"
-                placeholder="Comment"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="uh-primary-btn uh-contact-submit"
-                disabled={sending}
-              >
-                {sending ? "Sending..." : "Submit"}
-              </button>
-            </form>
 
+              {/* O'ng – avatar + forma */}
+              <div className="uh-contact-right">
+                <div className="uh-contact-avatar">
+                  <div className="uh-contact-avatar-circle">
+                    <img
+                      src="/images/unihero-center.png"
+                      alt="UniHero"
+                      className="uh-contact-avatar-img"
+                    />
+                  </div>
+                </div>
+
+                <form
+                  className="uh-contact-form"
+                  onSubmit={handleContactSubmit}
+                >
+                  <div className="uh-contact-row">
+                    <input
+                      className="uh-input"
+                      placeholder="Full Name"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                    />
+                    <input
+                      className="uh-input"
+                      placeholder="Telegram Username"
+                      value={telegramUser}
+                      onChange={(e) => setTelegramUser(e.target.value)}
+                    />
+                  </div>
+
+                  <textarea
+                    className="uh-textarea"
+                    placeholder="Comment"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+
+                  <button
+                    type="submit"
+                    className="uh-primary-btn uh-contact-submit"
+                    disabled={sending}
+                  >
+                    {sending ? "Sending..." : "Submit"}
+                  </button>
+                </form>
+              </div>
+            </div>
+
+            {/* Pastdagi chiplar */}
             <div className="uh-contact-links">
               <a
                 href="https://t.me/UniHero_news"
