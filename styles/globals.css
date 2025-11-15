@@ -777,4 +777,27 @@ button {
   .uh-contact-illustration-inner {
     max-width: 320px;
   }
+  /* Pastdagi telegram linklar uchun chip dizayn */
+.uh-chip {
+  padding: 8px 16px;
+  border-radius: var(--uh-radius-pill);
+  background: rgba(0, 10, 35, 0.9);
+  border: 1px solid rgba(151, 202, 219, 0.4);
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+
+.uh-chip:hover {
+  background: rgba(1, 138, 190, 0.2);
+  border-color: rgba(214, 235, 238, 0.9);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
 }
