@@ -27,12 +27,7 @@ body {
   padding: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
-  background: radial-gradient(
-    circle at top left,
-    #02457a,
-    #001b48 55%,
-    #000814
-  );
+  background: radial-gradient(circle at top left, #02457a, #001b48 55%, #000814);
   color: var(--uh-text-primary);
   scroll-behavior: smooth;
 }
@@ -118,7 +113,10 @@ button {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease,
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease,
     border-color 0.2s ease;
 }
 
@@ -194,7 +192,10 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
-  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease,
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease,
     color 0.2s ease;
 }
 
@@ -250,6 +251,7 @@ button {
 
 .uh-timeline {
   margin: 28px 0 10px;
+  position: relative;
 }
 
 .uh-timeline-items-row {
@@ -265,25 +267,33 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: transform 0.35s ease, opacity 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease,
+    filter 0.35s ease;
   cursor: pointer;
 }
 
-/* Markazdagi karta – kattaroq */
+/* Markazdagi karta – kattaroq va yaqin */
 .uh-timeline-item--center {
-  transform: translateY(-6px) scale(1.05);
+  transform: translateY(-12px) scale(1.12);
   opacity: 1;
   z-index: 2;
 }
 
-/* Chap va o‘ng kartalar – biroz kichikroq */
+/* Chap va o‘ng kartalar – kichikroq + blur */
 .uh-timeline-item--left,
 .uh-timeline-item--right {
-  transform: translateY(10px) scale(0.93);
-  opacity: 0.85;
+  transform: translateY(10px) scale(0.9);
+  opacity: 0.6;
 }
 
-/* Qolgan 2 ta slayd ko‘rinmasin */
+.uh-timeline-item--left .uh-timeline-card,
+.uh-timeline-item--right .uh-timeline-card {
+  filter: blur(2px) brightness(0.8);
+}
+
+/* Qolgan slaydlar ko‘rinmasin */
 .uh-timeline-item--hidden {
   display: none;
 }
@@ -337,9 +347,10 @@ button {
   color: var(--uh-text-muted);
 }
 
-/* markazdagi kattaroq chiziq va sarlavha */
+/* Markazdagi karta highlight */
 .uh-timeline-item--center .uh-timeline-card {
   box-shadow: 0 22px 40px rgba(0, 0, 0, 0.55);
+  filter: none;
 }
 
 .uh-timeline-item--center .uh-timeline-meta-title {
@@ -348,6 +359,40 @@ button {
 
 .uh-timeline-item--center .uh-timeline-line {
   background: var(--uh-extra-light);
+}
+
+/* TIMELINE ARROWS */
+
+.uh-timeline-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid rgba(214, 235, 238, 0.6);
+  background: rgba(0, 10, 35, 0.95);
+  color: var(--uh-extra-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.7);
+  font-size: 22px;
+  z-index: 3;
+}
+
+.uh-timeline-arrow--left {
+  left: 0;
+}
+
+.uh-timeline-arrow--right {
+  right: 0;
+}
+
+.uh-timeline-arrow:hover {
+  background: rgba(1, 138, 190, 0.25);
+  border-color: rgba(214, 235, 238, 0.9);
 }
 
 /* ====== WHY STUDENTS LOVE (BENEFITS) ====== */
@@ -451,8 +496,8 @@ button {
 }
 
 .uh-resources-logo-circle {
-  width: 180px;
-  height: 180px;
+  width: 170px;
+  height: 170px;
   border-radius: 50%;
   border: 5px solid var(--uh-extra-light);
   display: flex;
@@ -463,174 +508,132 @@ button {
 }
 
 .uh-resources-logo {
-  width: 120px;
+  width: 160px;
   height: auto;
+  border-radius: 50%;
   object-fit: contain;
 }
 
-/* description blok (agar kerak bo'lsa) */
-.uh-resources-detail {
-  margin-top: 22px;
-  max-width: 640px;
-  padding: 14px 18px 18px;
-  border-radius: 20px;
-  background: rgba(0, 10, 35, 0.9);
-  border: 1px solid rgba(151, 202, 219, 0.35);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
-}
+/* ====== RESOURCES MODAL (overlay) ====== */
 
-.uh-resources-detail-title {
+.uh-resources-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 11, 30, 0.6);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  font-size: 16px;
-  margin-bottom: 6px;
+  justify-content: center;
+  z-index: 50;
 }
 
-.uh-resources-detail-emoji {
+.uh-resources-modal {
+  width: min(480px, 90%);
+  border-radius: 32px;
+  background: rgba(0, 10, 35, 0.98);
+  border: 1px solid rgba(151, 202, 219, 0.5);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8);
+  padding: 28px 28px 24px;
+  text-align: center;
+  position: relative;
+}
+
+.uh-resources-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  border: none;
+  background: transparent;
+  color: var(--uh-text-muted);
+  cursor: pointer;
   font-size: 18px;
 }
 
-.uh-resources-detail-text {
-  margin: 0 0 10px;
+.uh-resources-modal-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.uh-resources-modal-emoji {
+  font-size: 24px;
+}
+
+.uh-resources-modal-body {
+  margin-bottom: 16px;
+}
+
+.uh-resources-modal-text {
+  margin: 0;
   font-size: 14px;
   color: var(--uh-text-muted);
 }
 
-.uh-resources-detail-cta {
-  padding-inline: 18px;
+.uh-resources-modal-primary {
+  margin-top: 6px;
+}
+
+/* MOTIVATION QUOTE STYLE */
+
+.uh-resources-quote-card {
+  margin-top: 4px;
+  margin-bottom: 10px;
+  padding: 18px 16px 20px;
+  border-radius: 24px;
+  background: rgba(0, 16, 48, 0.95);
+  border: 1px solid rgba(151, 202, 219, 0.45);
+  position: relative;
+}
+
+.uh-resources-quote-marks {
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  font-size: 32px;
+  opacity: 0.25;
+}
+
+.uh-resources-quote-text {
+  margin: 0;
+  font-size: 15px;
+  color: var(--uh-extra-light);
+}
+
+/* HUB LINKS */
+
+.uh-resources-hub-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.uh-resources-hub-chip {
+  padding: 8px 14px;
+  border-radius: var(--uh-radius-pill);
+  background: rgba(0, 18, 60, 0.95);
+  border: 1px solid rgba(151, 202, 219, 0.6);
   font-size: 13px;
 }
 
-/* ====== RESOURCES MODAL ====== */
+/* PODCASTS YOUTUBE ICON */
 
-.uh-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  z-index: 60;
-}
-
-.uh-modal {
-  position: relative;
-  max-width: 520px;
-  width: 100%;
-  background: rgba(0, 10, 35, 0.96);
-  border-radius: 32px;
-  padding: 32px 40px 28px;
-  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.75);
-  text-align: center;
-  border: 1px solid rgba(151, 202, 219, 0.4);
-}
-
-.uh-modal-title {
-  font-size: 24px;
-  margin: 0 0 10px;
-}
-
-.uh-modal-text {
-  font-size: 15px;
-  color: var(--uh-text-muted);
-  margin: 0 0 24px;
-}
-
-.uh-modal-icon {
-  position: absolute;
-  top: -28px;
-  right: 32px;
-  font-size: 36px;
-}
-
-.uh-modal-close {
-  position: absolute;
-  top: 14px;
-  right: 16px;
-  width: 28px;
-  height: 28px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(0, 0, 0, 0.35);
-  color: var(--uh-extra-light);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 16px;
-}
-
-.uh-modal-close:hover {
-  background: rgba(214, 235, 238, 0.16);
-}
-
-.uh-modal-cta {
-  margin-top: 4px;
-}
-
-.uh-modal-quote-box {
-  position: relative;
-  padding: 18px 8px 6px;
-}
-
-.uh-modal-quote {
-  font-size: 18px;
-  line-height: 1.5;
-  margin: 8px 0 12px;
-}
-
-.uh-modal-quote-author {
-  font-weight: 600;
-  font-size: 16px;
-}
-
-.uh-quote-marks {
-  font-size: 42px;
-  line-height: 1;
-  opacity: 0.3;
-}
-
-.uh-play-icon {
-  width: 86px;
-  height: 58px;
+.uh-resources-youtube-icon {
+  width: 76px;
+  height: 52px;
   border-radius: 16px;
+  margin: 10px auto 6px;
   background: #ff0000;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 18px;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
-}
-
-.uh-play-icon span {
-  color: #fff;
-  font-size: 28px;
-  margin-left: 4px;
-}
-
-/* UniHero Hub chips inside modal */
-.uh-hub-links {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: center;
-}
-
-.uh-hub-links-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.uh-hub-chip {
-  cursor: pointer;
+  color: white;
+  font-size: 30px;
 }
 
 /* ====== CONTACT FORM ====== */
@@ -709,7 +712,6 @@ button {
 
   .uh-resources {
     flex-direction: column;
-    align-items: stretch;
     gap: 24px;
   }
 
@@ -718,8 +720,12 @@ button {
   }
 
   .uh-resources-logo-circle {
-    width: 160px;
-    height: 160px;
+    width: 180px;
+    height: 180px;
+  }
+
+  .uh-resources-logo {
+    width: 130px;
   }
 }
 
@@ -763,12 +769,16 @@ button {
     height: 170px;
   }
 
+  .uh-timeline-arrow {
+    display: none;
+  }
+
   .uh-contact-row {
     flex-direction: column;
   }
 
   .uh-resource-pill {
     width: 240px;
-    align-self: center;
+    margin-inline: auto;
   }
 }
