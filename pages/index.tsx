@@ -94,6 +94,7 @@ export default function HomePage() {
   // Timeline kartalarining classini hisoblash (chap / o‘rta / o‘ng / yashirin)
   const getTimelineItemClass = (index: number) => {
     if (index === activeTimeline) {
+      // markazdagi kattaroq slayd
       return "uh-timeline-item uh-timeline-item--center";
     }
 
@@ -102,14 +103,26 @@ export default function HomePage() {
     const next = (activeTimeline + 1) % timelineItems.length;
 
     if (index === prev) {
+      // chap slayd
       return "uh-timeline-item uh-timeline-item--left";
     }
     if (index === next) {
+      // o‘ng slayd
       return "uh-timeline-item uh-timeline-item--right";
     }
 
     // qolgan 2 ta slayd ko‘rinmasin
     return "uh-timeline-item uh-timeline-item--hidden";
+  };
+
+  const goPrevTimeline = () => {
+    setActiveTimeline(
+      (prev) => (prev - 1 + timelineItems.length) % timelineItems.length
+    );
+  };
+
+  const goNextTimeline = () => {
+    setActiveTimeline((prev) => (prev + 1) % timelineItems.length);
   };
 
   return (
@@ -202,32 +215,69 @@ export default function HomePage() {
 
             {/* TIMELINE */}
             <div className="uh-timeline">
-              <div className="uh-timeline-items-row">
-                {timelineItems.map((item, idx) => (
-                  <div
-                    key={item.title}
-                    className={getTimelineItemClass(idx)}
-                    onClick={() => setActiveTimeline(idx)}
-                  >
-                    <div className="uh-timeline-card">
-                      <img
-                        src={item.img}
-                        alt={item.title}
-                        className="uh-timeline-img"
-                      />
-                    </div>
+              <div className="uh-timeline-wrapper">
+                {/* Chap arrow */}
+                <button
+                  type="button"
+                  className="uh-timeline-arrow uh-timeline-arrow--left"
+                  onClick={goPrevTimeline}
+                  aria-label="Previous story"
+                >
+                  ‹
+                </button>
 
-                    <div className="uh-timeline-meta">
-                      <div className="uh-timeline-line" />
-                      <div className="uh-timeline-meta-title">
-                        <span className="uh-timeline-meta-emoji">
-                          {item.emoji}
-                        </span>
-                        <span>{item.title}</span>
+                {/* Slaydlar qatori */}
+                <div className="uh-timeline-items-row">
+                  {timelineItems.map((item, idx) => (
+                    <div
+                      key={item.title}
+                      className={getTimelineItemClass(idx)}
+                      onClick={() => setActiveTimeline(idx)}
+                    >
+                      <div className="uh-timeline-card">
+                        <img
+                          src={item.img}
+                          alt={item.title}
+                          className="uh-timeline-img"
+                        />
                       </div>
-                      <div className="uh-timeline-meta-date">{item.date}</div>
+
+                      <div className="uh-timeline-meta">
+                        <div className="uh-timeline-line" />
+                        <div className="uh-timeline-meta-title">
+                          <span className="uh-timeline-meta-emoji">
+                            {item.emoji}
+                          </span>
+                          <span>{item.title}</span>
+                        </div>
+                        <div className="uh-timeline-meta-date">{item.date}</div>
+                      </div>
                     </div>
-                  </div>
+                  ))}
+                </div>
+
+                {/* O‘ng arrow */}
+                <button
+                  type="button"
+                  className="uh-timeline-arrow uh-timeline-arrow--right"
+                  onClick={goNextTimeline}
+                  aria-label="Next story"
+                >
+                  ›
+                </button>
+              </div>
+
+              {/* Nuqtachalar */}
+              <div className="uh-timeline-dots">
+                {timelineItems.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className={
+                      idx === activeTimeline ? "uh-dot uh-dot--active" : "uh-dot"
+                    }
+                    onClick={() => setActiveTimeline(idx)}
+                  />
                 ))}
               </div>
             </div>
