@@ -14,53 +14,8 @@ type ResourceKey =
   | "examPrep"
   | "motivation"
   | "studyGuides"
-  | "uniheroHub"
+  | "uniHeroHub"
   | "studyPodcasts";
-
-interface MotivationQuote {
-  text: string;
-  author: string;
-}
-
-const TELEGRAM_NEWS = "https://t.me/UniHero_news";
-const TELEGRAM_BOT = "https://t.me/UniHero_BOT";
-const TELEGRAM_ADMIN = "https://t.me/Unihero_admin";
-
-// Agar keyin linklar o'zgarsa, faqat shu joydan almashtirasiz
-const STUDY_GUIDES_LINK = TELEGRAM_BOT;
-
-const MOTIVATION_QUOTES: MotivationQuote[] = [
-  { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
-  { text: "Success is the sum of small efforts, repeated day in and day out.", author: "Robert Collier" },
-  { text: "It always seems impossible until it’s done.", author: "Nelson Mandela" },
-  { text: "Discipline is the bridge between goals and accomplishment.", author: "Jim Rohn" },
-  { text: "You don’t have to be great to start, but you have to start to be great.", author: "Zig Ziglar" },
-  { text: "Your future is created by what you do today, not tomorrow.", author: "Robert Kiyosaki" },
-  { text: "Small progress is still progress. Keep going.", author: "Unknown" },
-  { text: "Dream big. Start small. Act now.", author: "Robin Sharma" },
-];
-
-const PODCAST_LINKS: string[] = [
-  "https://www.youtube.com/c/aliabdaal",
-  "https://www.youtube.com/c/ThomasFrank",
-  "https://www.youtube.com/c/MattDAvella",
-  "https://www.youtube.com/c/timferriss",
-  "https://www.youtube.com/playlist?list=PLEITKg6BYjonkVKAPYaHMMa4-4ZU-EEYs",
-  "https://www.youtube.com/c/HurrySlowly",
-  "https://www.youtube.com/c/MarieForleo",
-  "https://www.youtube.com/playlist?list=PL27GCkYOrUzvoENAkd1MfXG2NnkdbIJMq",
-  "https://www.youtube.com/c/CalNewportDeepQuestions",
-  "https://www.youtube.com/c/BeforeBreakfast",
-];
-
-const RESOURCE_EMOJI: Record<ResourceKey, string> = {
-  assignments: "📑",
-  examPrep: "📝",
-  motivation: "🚀",
-  studyGuides: "📖",
-  uniheroHub: "📨",
-  studyPodcasts: "🎧",
-};
 
 const timelineItems: TimelineItem[] = [
   {
@@ -95,8 +50,35 @@ const timelineItems: TimelineItem[] = [
   },
 ];
 
+const MOTIVATION_QUOTES: string[] = [
+  "The only way to do great work is to love what you do. – Steve Jobs",
+  "Success is the sum of small efforts, repeated day in and day out. – Robert Collier",
+  "It always seems impossible until it’s done. – Nelson Mandela",
+  "Discipline is the bridge between goals and accomplishment. – Jim Rohn",
+  "You don’t have to be great to start, but you have to start to be great. – Zig Ziglar",
+  "Don’t watch the clock; do what it does. Keep going. – Sam Levenson",
+  "Your future is created by what you do today, not tomorrow.",
+  "Dream big. Start small. But most of all, start.",
+];
+
+const PODCAST_LINKS: string[] = [
+  "https://www.youtube.com/c/aliabdaal",
+  "https://www.youtube.com/c/ThomasFrank",
+  "https://www.youtube.com/c/MattDAvella",
+  "https://www.youtube.com/c/timferriss",
+  "https://www.youtube.com/playlist?list=PLEITKg6BYjonkVKAPYaHMMa4-4ZU-EEYs",
+  "https://www.youtube.com/c/HurrySlowly",
+  "https://www.youtube.com/c/MarieForleo",
+  "https://www.youtube.com/playlist?list=PL27GCkYOrUzvoENAkd1MfXG2NnkdbIJMq",
+  "https://www.youtube.com/c/CalNewportDeepQuestions",
+  "https://www.youtube.com/c/BeforeBreakfast",
+];
+
 export default function HomePage() {
   const [activeTimeline, setActiveTimeline] = useState<number>(1);
+
+  const [activeResource, setActiveResource] = useState<ResourceKey | null>(null);
+  const [motivationQuote, setMotivationQuote] = useState<string>("");
 
   // 7 sekundda bir timeline slayderi aylanib turadi
   useEffect(() => {
@@ -144,6 +126,18 @@ export default function HomePage() {
     }
   };
 
+  /* ====== TIMELINE HELPERS ====== */
+
+  const goPrevTimeline = () => {
+    setActiveTimeline(
+      (prev) => (prev - 1 + timelineItems.length) % timelineItems.length
+    );
+  };
+
+  const goNextTimeline = () => {
+    setActiveTimeline((prev) => (prev + 1) % timelineItems.length);
+  };
+
   // Timeline kartalarining classini hisoblash (chap / o‘rta / o‘ng / yashirin)
   const getTimelineItemClass = (index: number) => {
     if (index === activeTimeline) {
@@ -165,34 +159,256 @@ export default function HomePage() {
     return "uh-timeline-item uh-timeline-item--hidden";
   };
 
-  /* ========= RESOURCES MODAL STATE ========= */
+  /* ====== RESOURCES HELPERS ====== */
 
-  const [activeResource, setActiveResource] = useState<ResourceKey | null>(null);
-  const [motivationIndex, setMotivationIndex] = useState<number | null>(null);
-  const [podcastUrl, setPodcastUrl] = useState<string | null>(null);
+  const pickRandomQuote = () => {
+    const i = Math.floor(Math.random() * MOTIVATION_QUOTES.length);
+    return MOTIVATION_QUOTES[i];
+  };
+
+  const openUrl = (url: string) => {
+    if (typeof window !== "undefined") {
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+  };
+
+  const openRandomPodcast = () => {
+    const i = Math.floor(Math.random() * PODCAST_LINKS.length);
+    openUrl(PODCAST_LINKS[i]);
+  };
 
   const openResource = (key: ResourceKey) => {
     if (key === "motivation") {
-      const idx = Math.floor(Math.random() * MOTIVATION_QUOTES.length);
-      setMotivationIndex(idx);
-    }
-    if (key === "studyPodcasts") {
-      const idx = Math.floor(Math.random() * PODCAST_LINKS.length);
-      setPodcastUrl(PODCAST_LINKS[idx]);
+      setMotivationQuote(pickRandomQuote());
     }
     setActiveResource(key);
   };
 
-  const closeResource = () => {
-    setActiveResource(null);
+  const closeResourceModal = () => setActiveResource(null);
+
+  const renderSimpleResourceModal = (
+    title: string,
+    emoji: string,
+    body: React.ReactNode,
+    ctaLabel?: string,
+    ctaOnClick?: () => void
+  ) => (
+    <div
+      className="uh-resources-modal-backdrop"
+      onClick={closeResourceModal}
+    >
+      <div
+        className="uh-resources-modal"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          className="uh-resources-modal-close"
+          onClick={closeResourceModal}
+          aria-label="Close"
+        >
+          ✕
+        </button>
+        <div className="uh-resources-modal-title">
+          <span>{title}</span>
+          <span className="uh-resources-modal-emoji">{emoji}</span>
+        </div>
+        <div className="uh-resources-modal-body">{body}</div>
+        {ctaLabel && ctaOnClick && (
+          <button
+            type="button"
+            className="uh-primary-btn uh-resources-modal-primary"
+            onClick={ctaOnClick}
+          >
+            {ctaLabel}
+          </button>
+        )}
+      </div>
+    </div>
+  );
+
+  const renderResourceModal = () => {
+    if (!activeResource) return null;
+
+    switch (activeResource) {
+      case "assignments":
+        return renderSimpleResourceModal(
+          "Assignments",
+          "📑",
+          <p className="uh-resources-modal-text">
+            Need help with assignments? You can place an order via the UniHero
+            BOT and get support from our team.
+          </p>,
+          "Order",
+          () => openUrl("https://t.me/UniHero_BOT")
+        );
+
+      case "examPrep":
+        return renderSimpleResourceModal(
+          "Exam Prep",
+          "📝",
+          <p className="uh-resources-modal-text">
+            You can find all exam prep resources in our UniHero BOT – summaries,
+            tips and practice questions. Join and get ready smarter.
+          </p>,
+          "Join",
+          () => openUrl("https://t.me/UniHero_BOT")
+        );
+
+      case "motivation":
+        return (
+          <div
+            className="uh-resources-modal-backdrop"
+            onClick={closeResourceModal}
+          >
+            <div
+              className="uh-resources-modal"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="uh-resources-modal-close"
+                onClick={closeResourceModal}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+              <div className="uh-resources-modal-title">
+                <span>Motivation</span>
+                <span className="uh-resources-modal-emoji">🚀</span>
+              </div>
+
+              <div className="uh-resources-quote-card">
+                <div className="uh-resources-quote-marks">“”</div>
+                <p className="uh-resources-quote-text">{motivationQuote}</p>
+              </div>
+
+              <button
+                type="button"
+                className="uh-primary-btn uh-resources-modal-primary"
+                onClick={() => setMotivationQuote(pickRandomQuote())}
+              >
+                Another quote
+              </button>
+            </div>
+          </div>
+        );
+
+      case "studyGuides":
+        return renderSimpleResourceModal(
+          "Study Guides",
+          "📖",
+          <p className="uh-resources-modal-text">
+            Get UniHero study guides, checklists and templates for university
+            courses. We&apos;ll send the link via UniHero BOT.
+          </p>,
+          "Download",
+          () => openUrl("https://t.me/UniHero_BOT")
+        );
+
+      case "uniHeroHub":
+        return (
+          <div
+            className="uh-resources-modal-backdrop"
+            onClick={closeResourceModal}
+          >
+            <div
+              className="uh-resources-modal"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="uh-resources-modal-close"
+                onClick={closeResourceModal}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+              <div className="uh-resources-modal-title">
+                <span>UniHero Hub</span>
+                <span className="uh-resources-modal-emoji">📨</span>
+              </div>
+              <p className="uh-resources-modal-text">
+                Connect with our community, bot and admin directly from UniHero
+                Hub.
+              </p>
+
+              <div className="uh-resources-hub-links">
+                <a
+                  href="https://t.me/UniHero_news"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="uh-resources-hub-chip"
+                >
+                  📣 UniHero_News
+                </a>
+                <a
+                  href="https://t.me/UniHero_BOT"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="uh-resources-hub-chip"
+                >
+                  🤖 UniHero BOT
+                </a>
+                <a
+                  href="https://t.me/Unihero_admin"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="uh-resources-hub-chip"
+                >
+                  👨🏻‍💻 Admin
+                </a>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "studyPodcasts":
+        return (
+          <div
+            className="uh-resources-modal-backdrop"
+            onClick={closeResourceModal}
+          >
+            <div
+              className="uh-resources-modal"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="uh-resources-modal-close"
+                onClick={closeResourceModal}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+              <div className="uh-resources-modal-title">
+                <span>Study Podcasts</span>
+                <span className="uh-resources-modal-emoji">🎧</span>
+              </div>
+              <p className="uh-resources-modal-text">
+                Boost your productivity with curated study podcasts and YouTube
+                channels. We&apos;ll open a random channel for you.
+              </p>
+
+              <div className="uh-resources-youtube-icon">
+                ▶
+              </div>
+
+              <button
+                type="button"
+                className="uh-primary-btn uh-resources-modal-primary"
+                onClick={openRandomPodcast}
+              >
+                Start learn
+              </button>
+            </div>
+          </div>
+        );
+
+      default:
+        return null;
+    }
   };
-
-  const currentQuote =
-    motivationIndex !== null
-      ? MOTIVATION_QUOTES[motivationIndex]
-      : MOTIVATION_QUOTES[0];
-
-  const currentPodcastUrl = podcastUrl ?? PODCAST_LINKS[0];
 
   return (
     <>
@@ -258,7 +474,7 @@ export default function HomePage() {
 
               <div className="uh-hero-actions">
                 <a
-                  href={TELEGRAM_NEWS}
+                  href="https://t.me/UniHero_news"
                   target="_blank"
                   rel="noreferrer"
                   className="uh-primary-btn"
@@ -284,6 +500,16 @@ export default function HomePage() {
 
             {/* TIMELINE */}
             <div className="uh-timeline">
+              {/* Chap strelka */}
+              <button
+                type="button"
+                className="uh-timeline-arrow uh-timeline-arrow--left"
+                onClick={goPrevTimeline}
+                aria-label="Previous story"
+              >
+                ‹
+              </button>
+
               <div className="uh-timeline-items-row">
                 {timelineItems.map((item, idx) => (
                   <div
@@ -312,6 +538,16 @@ export default function HomePage() {
                   </div>
                 ))}
               </div>
+
+              {/* O‘ng strelka */}
+              <button
+                type="button"
+                className="uh-timeline-arrow uh-timeline-arrow--right"
+                onClick={goNextTimeline}
+                aria-label="Next story"
+              >
+                ›
+              </button>
             </div>
 
             {/* WHY STUDENTS LOVE */}
@@ -366,24 +602,38 @@ export default function HomePage() {
               <div className="uh-resources-col">
                 <button
                   type="button"
-                  className="uh-resource-pill"
+                  className={
+                    activeResource === "assignments"
+                      ? "uh-resource-pill uh-resource-pill--active"
+                      : "uh-resource-pill"
+                  }
                   onClick={() => openResource("assignments")}
                 >
                   <span className="uh-resource-label">Assignments</span>
                   <span className="uh-resource-emoji">📑</span>
                 </button>
+
                 <button
                   type="button"
-                  className="uh-resource-pill"
+                  className={
+                    activeResource === "motivation"
+                      ? "uh-resource-pill uh-resource-pill--active"
+                      : "uh-resource-pill"
+                  }
                   onClick={() => openResource("motivation")}
                 >
                   <span className="uh-resource-label">Motivation</span>
                   <span className="uh-resource-emoji">🚀</span>
                 </button>
+
                 <button
                   type="button"
-                  className="uh-resource-pill"
-                  onClick={() => openResource("uniheroHub")}
+                  className={
+                    activeResource === "uniHeroHub"
+                      ? "uh-resource-pill uh-resource-pill--active"
+                      : "uh-resource-pill"
+                  }
+                  onClick={() => openResource("uniHeroHub")}
                 >
                   <span className="uh-resource-label">UniHero Hub</span>
                   <span className="uh-resource-emoji">📨</span>
@@ -405,23 +655,37 @@ export default function HomePage() {
               <div className="uh-resources-col">
                 <button
                   type="button"
-                  className="uh-resource-pill"
+                  className={
+                    activeResource === "examPrep"
+                      ? "uh-resource-pill uh-resource-pill--active"
+                      : "uh-resource-pill"
+                  }
                   onClick={() => openResource("examPrep")}
                 >
                   <span className="uh-resource-label">Exam Prep</span>
                   <span className="uh-resource-emoji">📝</span>
                 </button>
+
                 <button
                   type="button"
-                  className="uh-resource-pill"
+                  className={
+                    activeResource === "studyGuides"
+                      ? "uh-resource-pill uh-resource-pill--active"
+                      : "uh-resource-pill"
+                  }
                   onClick={() => openResource("studyGuides")}
                 >
                   <span className="uh-resource-label">Study Guides</span>
                   <span className="uh-resource-emoji">📖</span>
                 </button>
+
                 <button
                   type="button"
-                  className="uh-resource-pill"
+                  className={
+                    activeResource === "studyPodcasts"
+                      ? "uh-resource-pill uh-resource-pill--active"
+                      : "uh-resource-pill"
+                  }
                   onClick={() => openResource("studyPodcasts")}
                 >
                   <span className="uh-resource-label">Study Podcasts</span>
@@ -429,6 +693,9 @@ export default function HomePage() {
                 </button>
               </div>
             </div>
+
+            {/* Modal (overlay) */}
+            {renderResourceModal()}
           </section>
 
           {/* CONTACT */}
@@ -473,7 +740,7 @@ export default function HomePage() {
 
             <div className="uh-contact-links">
               <a
-                href={TELEGRAM_NEWS}
+                href="https://t.me/UniHero_news"
                 target="_blank"
                 rel="noreferrer"
                 className="uh-chip"
@@ -481,7 +748,7 @@ export default function HomePage() {
                 📣 UniHero_News
               </a>
               <a
-                href={TELEGRAM_BOT}
+                href="https://t.me/UniHero_BOT"
                 target="_blank"
                 rel="noreferrer"
                 className="uh-chip"
@@ -489,7 +756,7 @@ export default function HomePage() {
                 🤖 UniHero BOT
               </a>
               <a
-                href={TELEGRAM_ADMIN}
+                href="https://t.me/Unihero_admin"
                 target="_blank"
                 rel="noreferrer"
                 className="uh-chip"
@@ -499,161 +766,6 @@ export default function HomePage() {
             </div>
           </section>
         </main>
-
-        {/* ===== RESOURCES MODAL OVERLAY ===== */}
-        {activeResource && (
-          <div className="uh-modal-backdrop" onClick={closeResource}>
-            <div
-              className="uh-modal"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <button
-                type="button"
-                className="uh-modal-close"
-                onClick={closeResource}
-                aria-label="Close"
-              >
-                ×
-              </button>
-
-              <div className="uh-modal-icon-badge">
-                {RESOURCE_EMOJI[activeResource]}
-              </div>
-
-              {activeResource === "assignments" && (
-                <>
-                  <h3 className="uh-modal-title">Assignments</h3>
-                  <p className="uh-modal-body">
-                    Need help with your university assignments? Place your
-                    order directly via UniHero bot.
-                  </p>
-                  <a
-                    href={TELEGRAM_BOT}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="uh-modal-btn"
-                  >
-                    Order
-                  </a>
-                </>
-              )}
-
-              {activeResource === "examPrep" && (
-                <>
-                  <h3 className="uh-modal-title">Exam Prep</h3>
-                  <p className="uh-modal-body">
-                    You can find all exam preparation resources in our UniHero
-                    bot: past papers, tips, plans and more.
-                  </p>
-                  <a
-                    href={TELEGRAM_BOT}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="uh-modal-btn"
-                  >
-                    Join!
-                  </a>
-                </>
-              )}
-
-              {activeResource === "motivation" && (
-                <>
-                  <h3 className="uh-modal-title">Motivation</h3>
-                  <p className="uh-modal-quote">
-                    “{currentQuote.text}”
-                  </p>
-                  <p className="uh-modal-quote-author">
-                    — {currentQuote.author}
-                  </p>
-                  <button
-                    type="button"
-                    className="uh-secondary-btn uh-modal-secondary"
-                    onClick={() => {
-                      const idx = Math.floor(
-                        Math.random() * MOTIVATION_QUOTES.length
-                      );
-                      setMotivationIndex(idx);
-                    }}
-                  >
-                    Another quote
-                  </button>
-                </>
-              )}
-
-              {activeResource === "studyGuides" && (
-                <>
-                  <h3 className="uh-modal-title">Study Guides</h3>
-                  <p className="uh-modal-body">
-                    Get structured study guides and materials for your
-                    university subjects.
-                  </p>
-                  <a
-                    href={STUDY_GUIDES_LINK}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="uh-modal-btn"
-                  >
-                    Download
-                  </a>
-                </>
-              )}
-
-              {activeResource === "uniheroHub" && (
-                <>
-                  <h3 className="uh-modal-title">UniHero Hub</h3>
-                  <p className="uh-modal-body">
-                    Connect with the UniHero community: channel, bot and
-                    direct contact with admin.
-                  </p>
-                  <div className="uh-modal-links-row">
-                    <a
-                      href={TELEGRAM_NEWS}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="uh-modal-chip"
-                    >
-                      📣 UniHero_News
-                    </a>
-                    <a
-                      href={TELEGRAM_BOT}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="uh-modal-chip"
-                    >
-                      🤖 UniHero BOT
-                    </a>
-                    <a
-                      href={TELEGRAM_ADMIN}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="uh-modal-chip"
-                    >
-                      👨🏻‍💻 Admin
-                    </a>
-                  </div>
-                </>
-              )}
-
-              {activeResource === "studyPodcasts" && (
-                <>
-                  <h3 className="uh-modal-title">Study Podcasts</h3>
-                  <p className="uh-modal-body">
-                    We collected focused productivity & study channels for you.
-                    We&apos;ll open a random one to start learning.
-                  </p>
-                  <a
-                    href={currentPodcastUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="uh-modal-btn"
-                  >
-                    Start learn
-                  </a>
-                </>
-              )}
-            </div>
-          </div>
-        )}
       </div>
     </>
   );
