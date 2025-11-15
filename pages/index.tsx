@@ -50,15 +50,48 @@ const timelineItems: TimelineItem[] = [
   },
 ];
 
-const MOTIVATION_QUOTES: string[] = [
-  "The only way to do great work is to love what you do. – Steve Jobs",
-  "Success is the sum of small efforts, repeated day in and day out. – Robert Collier",
-  "It always seems impossible until it’s done. – Nelson Mandela",
-  "Discipline is the bridge between goals and accomplishment. – Jim Rohn",
-  "You don’t have to be great to start, but you have to start to be great. – Zig Ziglar",
-  "Don’t watch the clock; do what it does. Keep going. – Sam Levenson",
-  "Your future is created by what you do today, not tomorrow.",
-  "Dream big. Start small. But most of all, start.",
+/**
+ * Motivation generator – kombinatsiyalar soni:
+ * openers * actions * endings = 10 * 10 * 10 = 1000+ turli gap chiqadi
+ */
+
+const QUOTE_OPENERS: string[] = [
+  "Today is a good day to",
+  "UniHero reminder:",
+  "Tiny steps every day will",
+  "Future you will thank you if you",
+  "Even 20 minutes of focus can",
+  "Hard days are the best time to",
+  "You don’t need to be perfect to",
+  "Right now is the perfect moment to",
+  "If you want calmer exams, start to",
+  "You’re closer than you think if you",
+];
+
+const QUOTE_ACTIONS: string[] = [
+  "open the book and start.",
+  "review your notes once more.",
+  "turn off distractions and focus.",
+  "rewrite one messy paragraph.",
+  "solve just one extra problem.",
+  "summarise what you learned in five sentences.",
+  "teach a friend what you studied.",
+  "plan tomorrow’s tasks in three bullets.",
+  "watch a short explainer instead of scrolling.",
+  "ask one honest question you’ve been avoiding.",
+];
+
+const QUOTE_ENDINGS: string[] = [
+  "Your effort compounds faster than you imagine.",
+  "Consistency beats last-minute panic every time.",
+  "Smart, calm work today becomes freedom tomorrow.",
+  "Progress is a decision, not a feeling.",
+  "Even 1% better every day is huge in a semester.",
+  "You are building skills, not just chasing grades.",
+  "Rest is allowed; giving up isn’t.",
+  "Your current situation is not your final destination.",
+  "Future you is quietly cheering for you right now.",
+  "Small focused sessions beat long distracted ones.",
 ];
 
 const PODCAST_LINKS: string[] = [
@@ -162,8 +195,14 @@ export default function HomePage() {
   /* ====== RESOURCES HELPERS ====== */
 
   const pickRandomQuote = () => {
-    const i = Math.floor(Math.random() * MOTIVATION_QUOTES.length);
-    return MOTIVATION_QUOTES[i];
+    const opener =
+      QUOTE_OPENERS[Math.floor(Math.random() * QUOTE_OPENERS.length)];
+    const action =
+      QUOTE_ACTIONS[Math.floor(Math.random() * QUOTE_ACTIONS.length)];
+    const ending =
+      QUOTE_ENDINGS[Math.floor(Math.random() * QUOTE_ENDINGS.length)];
+
+    return `${opener} ${action} ${ending}`;
   };
 
   const openUrl = (url: string) => {
@@ -390,9 +429,7 @@ export default function HomePage() {
                 channels. We&apos;ll open a random channel for you.
               </p>
 
-              <div className="uh-resources-youtube-icon">
-                ▶
-              </div>
+              <div className="uh-resources-youtube-icon">▶</div>
 
               <button
                 type="button"
