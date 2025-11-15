@@ -30,6 +30,7 @@ body {
   background: radial-gradient(circle at top left, #02457a, #001b48 55%, #000814);
   color: var(--uh-text-primary);
   scroll-behavior: smooth;
+  overflow-x: hidden; /* mobil scroll bo‘lmasin */
 }
 
 a {
@@ -756,29 +757,6 @@ button {
   margin-top: 22px;
 }
 
-/* RESPONSIVE: kichik ekranlar uchun */
-@media (max-width: 960px) {
-  .uh-contact-layout {
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .uh-contact-panel {
-    flex: none;
-    width: 100%;
-    align-items: center;
-  }
-
-  .uh-contact-form {
-    max-width: 480px;
-  }
-
-  .uh-contact-illustration-inner {
-    max-width: 320px;
-  }
-}
-
 /* Pastdagi telegram linklar uchun chip dizayn */
 .uh-chip {
   padding: 8px 16px;
@@ -802,4 +780,98 @@ button {
   border-color: rgba(214, 235, 238, 0.9);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.5);
   transform: translateY(-1px);
+}
+
+.uh-chip:focus {
+  outline: none; /* atrofidagi ko‘k frame yo‘qolsin */
+}
+
+/* ====== RESPONSIVE (MOBILE) ====== */
+
+@media (max-width: 900px) {
+  .uh-main {
+    padding: 96px 16px 48px;
+  }
+
+  .uh-navbar {
+    height: 64px;
+  }
+
+  .uh-navbar-inner {
+    padding: 0 12px;
+  }
+
+  .uh-logo-img {
+    height: 46px;
+  }
+
+  .uh-nav-links {
+    gap: 8px;
+  }
+
+  .uh-nav-pill {
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .uh-hero-card {
+    padding: 24px 18px 28px;
+    border-radius: 24px;
+  }
+
+  .uh-hero-title {
+    font-size: 28px;
+  }
+
+  .uh-hero-text {
+    font-size: 14px;
+  }
+
+  .uh-hero-actions {
+    flex-direction: column;
+  }
+
+  .uh-primary-btn,
+  .uh-secondary-btn {
+    width: 100%;
+  }
+
+  .uh-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .uh-timeline-card {
+    width: 260px;
+    height: 160px;
+  }
+
+  .uh-resources {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .uh-resources-center {
+    order: -1;
+    margin-bottom: 12px;
+  }
+
+  .uh-resources-logo-circle {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+@media (max-width: 600px) {
+  .uh-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .uh-timeline-items-row {
+    min-height: 220px;
+  }
+
+  .uh-timeline-arrow {
+    display: none; /* mobilga keraksiz strelkalar */
+  }
 }
