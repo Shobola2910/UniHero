@@ -92,7 +92,7 @@ button {
 }
 
 .uh-logo-img {
-  height: 150px; /* logo kattaroq */
+  height: 60px; /* logo kattaroq */
   width: auto;
   display: block;
 }
@@ -118,10 +118,7 @@ button {
   letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.15s ease,
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease,
     border-color 0.2s ease;
 }
 
@@ -145,16 +142,11 @@ button {
 }
 
 .uh-hero-card {
-  max-width: 1050px; /* kartani kengroq qildik */
+  max-width: 1050px;
   width: 100%;
   padding: 36px 56px 44px;
   border-radius: 32px;
-  background: radial-gradient(
-    circle at top left,
-    #018abe,
-    #001b48 55%,
-    #000c26
-  );
+  background: radial-gradient(circle at top left, #018abe, #001b48 55%, #000c26);
   box-shadow: var(--uh-shadow-soft);
 }
 
@@ -202,10 +194,7 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
-  transition:
-    background 0.2s ease,
-    box-shadow 0.2s ease,
-    transform 0.15s ease,
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease,
     color 0.2s ease;
 }
 
@@ -257,45 +246,10 @@ button {
   margin-top: 40px;
 }
 
-/* ====== TIMELINE (ABOUT) – 3 ta karta: chap, markaz, o‘ng ====== */
+/* ====== TIMELINE (ABOUT) ====== */
 
 .uh-timeline {
   margin: 28px 0 10px;
-}
-
-/* timeline uchun o‘ng / chap strelkalar bilan o‘ralgan wrapper */
-.uh-timeline-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-/* chap/o‘ng tugmalar */
-.uh-timeline-arrow {
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(0, 12, 40, 0.85);
-  color: var(--uh-extra-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.65);
-  cursor: pointer;
-  font-size: 22px;
-  transition:
-    background 0.2s ease,
-    transform 0.15s ease,
-    box-shadow 0.2s ease,
-    opacity 0.2s ease;
-}
-
-.uh-timeline-arrow:hover {
-  background: #018abe;
-  transform: translateY(-1px);
-  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.7);
 }
 
 .uh-timeline-items-row {
@@ -311,30 +265,22 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition:
-    transform 0.35s ease,
-    opacity 0.35s ease;
+  transition: transform 0.35s ease, opacity 0.35s ease;
   cursor: pointer;
 }
 
-/* Markazdagi karta – kattaroq va yaqinroq */
+/* Markazdagi karta – kattaroq */
 .uh-timeline-item--center {
-  transform: translateY(-6px) scale(1.06);
+  transform: translateY(-6px) scale(1.05);
   opacity: 1;
   z-index: 2;
 }
 
-/* Chap va o‘ng kartalar – kichikroq + blur + yarim shaffof */
+/* Chap va o‘ng kartalar – biroz kichikroq */
 .uh-timeline-item--left,
 .uh-timeline-item--right {
-  transform: translateY(10px) scale(0.92);
-  opacity: 0.8;
-}
-
-.uh-timeline-item--left .uh-timeline-card,
-.uh-timeline-item--right .uh-timeline-card {
-  filter: blur(1.5px); /* ~50% blur effekti */
-  opacity: 0.75;
+  transform: translateY(10px) scale(0.93);
+  opacity: 0.85;
 }
 
 /* Qolgan 2 ta slayd ko‘rinmasin */
@@ -344,8 +290,8 @@ button {
 
 /* Karta rasmi */
 .uh-timeline-card {
-  width: 330px;
-  height: 200px;
+  width: 320px;
+  height: 190px;
   border-radius: 26px;
   overflow: hidden;
   box-shadow: 0 18px 30px rgba(0, 0, 0, 0.45);
@@ -394,8 +340,6 @@ button {
 /* markazdagi kattaroq chiziq va sarlavha */
 .uh-timeline-item--center .uh-timeline-card {
   box-shadow: 0 22px 40px rgba(0, 0, 0, 0.55);
-  filter: none;
-  opacity: 1;
 }
 
 .uh-timeline-item--center .uh-timeline-meta-title {
@@ -403,33 +347,6 @@ button {
 }
 
 .uh-timeline-item--center .uh-timeline-line {
-  background: var(--uh-extra-light);
-}
-
-/* nuqtachalar (indicatorlar) */
-.uh-timeline-dots {
-  margin-top: 16px;
-  display: flex;
-  justify-content: center;
-  gap: 6px;
-}
-
-.uh-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 999px;
-  border: none;
-  padding: 0;
-  background: rgba(151, 202, 219, 0.35);
-  cursor: pointer;
-  transition:
-    width 0.2s ease,
-    background 0.2s ease,
-    transform 0.15s ease;
-}
-
-.uh-dot--active {
-  width: 22px;
   background: var(--uh-extra-light);
 }
 
@@ -471,6 +388,78 @@ button {
   margin: 0;
   font-size: 13px;
   color: var(--uh-text-muted);
+}
+
+/* ====== RESOURCES SECTION ====== */
+
+.uh-resources {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+}
+
+.uh-resources-col {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.uh-resource-pill {
+  width: 260px;
+  padding: 12px 22px;
+  border-radius: var(--uh-radius-pill);
+  background: rgba(0, 10, 35, 0.95);
+  border: 1px solid rgba(151, 202, 219, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
+  color: var(--uh-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    background 0.18s ease, border-color 0.18s ease;
+}
+
+.uh-resource-pill:hover {
+  transform: translateY(-2px);
+  background: rgba(1, 138, 190, 0.16);
+  border-color: rgba(214, 235, 238, 0.75);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+}
+
+.uh-resource-label {
+  white-space: nowrap;
+}
+
+.uh-resource-emoji {
+  font-size: 22px;
+}
+
+.uh-resources-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.uh-resources-logo-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 6px solid var(--uh-extra-light);
+  background: radial-gradient(circle at top, #018abe, #001b48 60%, #000814);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.75);
+}
+
+.uh-resources-logo {
+  width: 130px;
+  height: auto;
 }
 
 /* ====== CONTACT FORM ====== */
@@ -546,6 +535,20 @@ button {
   .uh-hero-card {
     padding: 28px 20px 30px;
   }
+
+  .uh-resources {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .uh-resources-logo-circle {
+    width: 180px;
+    height: 180px;
+  }
+
+  .uh-resources-logo {
+    width: 110px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -573,14 +576,6 @@ button {
     grid-template-columns: 1fr;
   }
 
-  .uh-timeline-wrapper {
-    gap: 8px;
-  }
-
-  .uh-timeline-arrow {
-    display: none; /* mobilga strelkalar shart emas */
-  }
-
   .uh-timeline-items-row {
     flex-direction: column;
     align-items: center;
@@ -598,5 +593,9 @@ button {
 
   .uh-contact-row {
     flex-direction: column;
+  }
+
+  .uh-resource-pill {
+    width: 240px;
   }
 }
