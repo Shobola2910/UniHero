@@ -54,13 +54,14 @@ export default function LandingPage() {
 
       {/* ABOUT + TIMELINE */}
       <section id="about">
-        <h2 className="uh-section-title">Our story</h2>
-        <p className="uh-section-sub">
-          A small student-run project that turned into a study companion for
-          hundreds of learners.
-        </p>
-        <TimelineSlider />
-      </section>
+  <h2 className="uh-section-title">Our story</h2>
+  <p className="uh-section-sub">
+    A small student-run project that turned into a study companion for
+    hundreds of learners.
+  </p>
+  <TimelineSlider />
+</section>
+
 
       {/* WHY UNI HERO */}
       <section>
