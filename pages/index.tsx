@@ -279,47 +279,47 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="uh-resources-layout">
-              {/* LEFT COLUMN */}
-              <div className="uh-resources-column">
-                <button className="uh-resource-pill">
-                  <span>Assignments</span>
-                  <span className="uh-resource-emoji">📚</span>
+            <div className="uh-resources">
+              {/* Chap tomondagi 3 ta pill */}
+              <div className="uh-resources-col">
+                <button type="button" className="uh-resource-pill">
+                  <span className="uh-resource-label">Assignments</span>
+                  <span className="uh-resource-emoji">📑</span>
                 </button>
-                <button className="uh-resource-pill">
-                  <span>Motivation</span>
+                <button type="button" className="uh-resource-pill">
+                  <span className="uh-resource-label">Motivation</span>
                   <span className="uh-resource-emoji">🚀</span>
                 </button>
-                <button className="uh-resource-pill">
-                  <span>UniHero Hub</span>
+                <button type="button" className="uh-resource-pill">
+                  <span className="uh-resource-label">UniHero Hub</span>
                   <span className="uh-resource-emoji">📨</span>
                 </button>
               </div>
 
-              {/* CENTER LOGO */}
+              {/* Markazdagi logo */}
               <div className="uh-resources-center">
                 <div className="uh-resources-logo-circle">
-                  {/* 3-rasmdagi logo – faylni public/images/unihero-mark.png qilib qo‘ying */}
+                  {/* 3-rasmni /public/images/unihero-mark.png nomi bilan qo‘yib ishlatsang bo‘ladi */}
                   <img
                     src="/images/unihero-mark.png"
-                    alt="UniHero mark"
-                    className="uh-resources-logo-img"
+                    alt="UniHero"
+                    className="uh-resources-logo"
                   />
                 </div>
               </div>
 
-              {/* RIGHT COLUMN */}
-              <div className="uh-resources-column">
-                <button className="uh-resource-pill uh-resource-pill--right">
-                  <span>Exam Prep</span>
+              {/* O‘ng tomondagi 3 ta pill */}
+              <div className="uh-resources-col">
+                <button type="button" className="uh-resource-pill">
+                  <span className="uh-resource-label">Exam Prep</span>
                   <span className="uh-resource-emoji">📝</span>
                 </button>
-                <button className="uh-resource-pill uh-resource-pill--right">
-                  <span>Study Guides</span>
+                <button type="button" className="uh-resource-pill">
+                  <span className="uh-resource-label">Study Guides</span>
                   <span className="uh-resource-emoji">📖</span>
                 </button>
-                <button className="uh-resource-pill uh-resource-pill--right">
-                  <span>Study Podcasts</span>
+                <button type="button" className="uh-resource-pill">
+                  <span className="uh-resource-label">Study Podcasts</span>
                   <span className="uh-resource-emoji">🎧</span>
                 </button>
               </div>
