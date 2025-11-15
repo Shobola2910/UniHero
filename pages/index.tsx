@@ -92,17 +92,26 @@ export default function HomePage() {
   };
 
   // Timeline kartalarining classini hisoblash (chap / o‘rta / o‘ng / yashirin)
-  const getTimelineCardClass = (index: number) => {
-    if (index === activeTimeline) return "uh-timeline-card uh-timeline-card--center";
+    const getTimelineItemClass = (index: number) => {
+    if (index === activeTimeline) {
+      return "uh-timeline-item uh-timeline-item--center";
+    }
 
-    const prev = (activeTimeline - 1 + timelineItems.length) % timelineItems.length;
+    const prev =
+      (activeTimeline - 1 + timelineItems.length) % timelineItems.length;
     const next = (activeTimeline + 1) % timelineItems.length;
 
-    if (index === prev) return "uh-timeline-card uh-timeline-card--left";
-    if (index === next) return "uh-timeline-card uh-timeline-card--right";
+    if (index === prev) {
+      return "uh-timeline-item uh-timeline-item--left";
+    }
+    if (index === next) {
+      return "uh-timeline-item uh-timeline-item--right";
+    }
 
-    return "uh-timeline-card uh-timeline-card--hidden";
+    // qolgan 2 ta slayd ko‘rinmasin
+    return "uh-timeline-item uh-timeline-item--hidden";
   };
+
 
   return (
     <>
