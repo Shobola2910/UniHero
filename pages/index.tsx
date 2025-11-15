@@ -51,8 +51,8 @@ const timelineItems: TimelineItem[] = [
 ];
 
 /**
- * Motivation generator – kombinatsiyalar soni:
- * openers * actions * endings = 10 * 10 * 10 = 1000+ turli gap chiqadi
+ * Motivation generator – kombinatsiyalar:
+ * 10 * 10 * 10 = 1000+ turli gap
  */
 
 const QUOTE_OPENERS: string[] = [
@@ -109,7 +109,6 @@ const PODCAST_LINKS: string[] = [
 
 export default function HomePage() {
   const [activeTimeline, setActiveTimeline] = useState<number>(1);
-
   const [activeResource, setActiveResource] = useState<ResourceKey | null>(null);
   const [motivationQuote, setMotivationQuote] = useState<string>("");
 
@@ -471,19 +470,19 @@ export default function HomePage() {
 
             <nav className="uh-nav-links">
               <a href="#hero" className="uh-nav-pill">
-                <span className="uh-nav-icon">🏠</span>
+                <span className="uh-nav-icon"></span>
                 <span>HOME</span>
               </a>
               <a href="#about" className="uh-nav-pill">
-                <span className="uh-nav-icon">💬</span>
+                <span className="uh-nav-icon"></span>
                 <span>ABOUT</span>
               </a>
               <a href="#resources" className="uh-nav-pill">
-                <span className="uh-nav-icon">📚</span>
+                <span className="uh-nav-icon"></span>
                 <span>RESOURCE</span>
               </a>
               <a href="#contact" className="uh-nav-pill">
-                <span className="uh-nav-icon">📞</span>
+                <span className="uh-nav-icon"></span>
                 <span>CONTACT</span>
               </a>
             </nav>
@@ -681,7 +680,7 @@ export default function HomePage() {
               <div className="uh-resources-center">
                 <div className="uh-resources-logo-circle">
                   <img
-                    src="/images/unihero-center.png"
+                    src="/images/unihero-center.webp"
                     alt="UniHero"
                     className="uh-resources-logo"
                   />
@@ -747,22 +746,22 @@ export default function HomePage() {
 
             <div className="uh-contact-layout">
               {/* Chap – katta logo card */}
-              <div className="uh-contact-left">
-                <div className="uh-contact-logo-card">
+              <div className="uh-contact-illustration">
+                <div className="uh-contact-illustration-inner">
                   <img
                     src="/images/contact/unihero-contact-main.png" // 3-rasmni shu nom bilan saqla
                     alt="UniHero contact"
-                    className="uh-contact-logo-img"
+                    className="uh-contact-illustration-img"
                   />
                 </div>
               </div>
 
               {/* O'ng – avatar + forma */}
-              <div className="uh-contact-right">
+              <div className="uh-contact-panel">
                 <div className="uh-contact-avatar">
                   <div className="uh-contact-avatar-circle">
                     <img
-                      src="/images/unihero-center.png"
+                      src="/logo-white.webp"
                       alt="UniHero"
                       className="uh-contact-avatar-img"
                     />
@@ -780,6 +779,8 @@ export default function HomePage() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                     />
+                  </div>
+                  <div className="uh-contact-row">
                     <input
                       className="uh-input"
                       placeholder="Telegram Username"
@@ -787,13 +788,14 @@ export default function HomePage() {
                       onChange={(e) => setTelegramUser(e.target.value)}
                     />
                   </div>
-
-                  <textarea
-                    className="uh-textarea"
-                    placeholder="Comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                  />
+                  <div className="uh-contact-row">
+                    <textarea
+                      className="uh-textarea"
+                      placeholder="Comment"
+                      value={comment}
+                      onChange={(e) => setComment(e.target.value)}
+                    />
+                  </div>
 
                   <button
                     type="submit"
