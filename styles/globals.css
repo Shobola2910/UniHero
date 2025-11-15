@@ -637,29 +637,99 @@ button {
   font-size: 30px;
 }
 
-/* ====== CONTACT FORM ====== */
+/* ====== CONTACT (FORM + LAYOUT) ====== */
 
+.uh-contact-layout {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* Chapdagi katta logo kartasi */
+.uh-contact-illustration {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.uh-contact-illustration-inner {
+  max-width: 380px;
+  width: 100%;
+  border-radius: 42px;
+  overflow: hidden;
+  box-shadow: 0 26px 50px rgba(0, 0, 0, 0.65);
+  background: radial-gradient(circle at top left, #03a9f4, #01579b);
+}
+
+.uh-contact-illustration-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* O‘ngdagi forma paneli */
+.uh-contact-panel {
+  flex: 0 0 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Dumaloq logo yuqorida */
+.uh-contact-avatar {
+  margin-bottom: 18px;
+}
+
+.uh-contact-avatar-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 5px solid var(--uh-extra-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  background: radial-gradient(circle at top left, #02457a, #001b48);
+}
+
+.uh-contact-avatar-img {
+  width: 68px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Form fieldlar */
 .uh-contact-form {
-  margin-top: 24px;
-  max-width: 720px;
+  width: 100%;
+  max-width: 420px;
 }
 
 .uh-contact-row {
   display: flex;
-  gap: 12px;
+  flex-direction: column;
   margin-bottom: 12px;
 }
 
 .uh-input,
 .uh-textarea {
   width: 100%;
-  border-radius: 16px;
+  border-radius: 999px;
   border: 1px solid rgba(151, 202, 219, 0.35);
-  background: rgba(0, 12, 40, 0.85);
-  padding: 10px 14px;
+  background: rgba(0, 12, 40, 0.95);
+  padding: 12px 18px;
   color: var(--uh-text-primary);
   font-size: 14px;
   outline: none;
+}
+
+.uh-textarea {
+  border-radius: 26px;
+  min-height: 180px;
+  resize: vertical;
+  padding-top: 14px;
 }
 
 .uh-input::placeholder,
@@ -673,113 +743,38 @@ button {
   box-shadow: 0 0 0 1px rgba(1, 138, 190, 0.6);
 }
 
-.uh-textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
 .uh-contact-submit {
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
+/* Pastdagi chiplar – o‘rtaga */
 .uh-contact-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 18px;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
 }
 
-.uh-chip {
-  padding: 8px 16px;
-  border-radius: var(--uh-radius-pill);
-  background: rgba(0, 10, 35, 0.9);
-  border: 1px solid rgba(151, 202, 219, 0.4);
-  font-size: 13px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-/* ====== RESPONSIVE ====== */
-
+/* RESPONSIVE: kichik ekranlar uchun */
 @media (max-width: 960px) {
-  .uh-benefits-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .uh-hero-card {
-    padding: 28px 20px 30px;
-  }
-
-  .uh-resources {
+  .uh-contact-layout {
     flex-direction: column;
+    align-items: center;
     gap: 24px;
   }
 
-  .uh-resources-center {
-    order: -1;
-  }
-
-  .uh-resources-logo-circle {
-    width: 180px;
-    height: 180px;
-  }
-
-  .uh-resources-logo {
-    width: 130px;
-  }
-}
-
-@media (max-width: 768px) {
-  .uh-navbar-inner {
-    justify-content: space-between;
-  }
-
-  .uh-nav-links {
-    gap: 8px;
-  }
-
-  .uh-nav-pill span:last-child {
-    display: none; /* faqat iconlar qolishi mumkin */
-  }
-
-  .uh-main {
-    padding: 100px 16px 48px;
-  }
-
-  .uh-hero-title {
-    font-size: 30px;
-  }
-
-  .uh-benefits-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .uh-timeline-items-row {
-    flex-direction: column;
+  .uh-contact-panel {
+    flex: none;
+    width: 100%;
     align-items: center;
   }
 
-  .uh-timeline-item--left,
-  .uh-timeline-item--right {
-    display: none;
+  .uh-contact-form {
+    max-width: 480px;
   }
 
-  .uh-timeline-card {
-    width: 280px;
-    height: 170px;
-  }
-
-  .uh-timeline-arrow {
-    display: none;
-  }
-
-  .uh-contact-row {
-    flex-direction: column;
-  }
-
-  .uh-resource-pill {
-    width: 240px;
-    margin-inline: auto;
+  .uh-contact-illustration-inner {
+    max-width: 320px;
   }
 }
