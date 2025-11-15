@@ -1,18 +1,20 @@
-/* === ROOT COLORS (palitra: #001B48, #02457A, #018ABE, #97CADB, #D6EBEE) === */
+/* ====== GLOBAL RESET & THEME ====== */
 :root {
-  --uh-navy: #001b48;
-  --uh-navy-soft: #012a6a;
-  --uh-blue: #02457a;
-  --uh-cyan: #018abe;
+  --uh-bg: #001b48;
+  --uh-bg-soft: #02457a;
+  --uh-accent: #018abe;
   --uh-light: #97cadb;
   --uh-extra-light: #d6ebee;
-  --uh-text-main: #ffffff;
-  --uh-text-muted: #d6ebee;
-  --uh-shadow-soft: 0 22px 45px rgba(0, 0, 0, 0.35);
-  --uh-radius-lg: 24px;
+
+  --uh-text-primary: #f5f7ff;
+  --uh-text-muted: rgba(214, 235, 238, 0.8);
+
+  --uh-radius-pill: 999px;
+  --uh-radius-card: 28px;
+
+  --uh-shadow-soft: 0 20px 40px rgba(0, 0, 0, 0.55);
 }
 
-/* RESET */
 *,
 *::before,
 *::after {
@@ -23,14 +25,10 @@ html,
 body {
   margin: 0;
   padding: 0;
-}
-
-body {
-  min-height: 100vh;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background: radial-gradient(circle at top, #02457a 0, #001b48 55%, #00122f 100%);
-  color: var(--uh-text-main);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #02457a, #001b48 55%, #000814);
+  color: var(--uh-text-primary);
+  scroll-behavior: smooth;
 }
 
 a {
@@ -39,30 +37,38 @@ a {
 }
 
 button {
-  font-family: inherit;
+  font: inherit;
 }
 
-/* PAGE WRAPPER */
+/* ====== PAGE LAYOUT ====== */
+
 .uh-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #001b48 0%, #02457a 40%, #01365d 100%);
-  color: var(--uh-text-main);
 }
 
-/* NAVBAR */
+.uh-main {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 120px 24px 64px;
+}
+
+/* ====== NAVBAR ====== */
+
 .uh-navbar {
-  position: sticky;
-  top: 0;
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 72px;
+  display: flex;
+  justify-content: center;
   z-index: 40;
-  background: rgba(0, 10, 40, 0.94);
+  background: linear-gradient(to bottom, #00132f, rgba(0, 15, 40, 0.7), transparent);
   backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(151, 202, 219, 0.15);
 }
 
 .uh-navbar-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 12px 24px;
+  width: 100%;
+  max-width: 1240px;
+  padding: 0 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -74,83 +80,64 @@ button {
   gap: 10px;
 }
 
-/* LOGO RASMI */
 .uh-logo-img {
-  height: 110px;
+  height: 60px; /* logo kattaroq */
   width: auto;
   display: block;
 }
 
-.uh-logo-circle {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
-  border: 2px solid var(--uh-extra-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 18px;
-  background: radial-gradient(circle at top, #018abe, #001b48);
-  box-shadow: 0 0 0 3px rgba(1, 138, 190, 0.4);
-}
-
-.uh-logo-text {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
+/* NAV LINKS */
 
 .uh-nav-links {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
 }
 
 .uh-nav-pill {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   padding: 8px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(151, 202, 219, 0.35);
-  background: linear-gradient(135deg, #001b48, #013962);
+  border-radius: var(--uh-radius-pill);
+  background: rgba(0, 9, 30, 0.7);
+  border: 1px solid rgba(151, 202, 219, 0.2);
+  color: var(--uh-text-primary);
   font-size: 13px;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    border-color 0.15s ease, background 0.15s ease;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease,
+    border-color 0.2s ease;
 }
 
 .uh-nav-pill:hover {
+  background: rgba(1, 138, 190, 0.25);
+  border-color: rgba(214, 235, 238, 0.6);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-  border-color: var(--uh-cyan);
-  background: linear-gradient(135deg, #013962, #018abe);
 }
 
 .uh-nav-icon {
-  font-size: 16px;
+  font-size: 15px;
 }
 
-/* MAIN LAYOUT */
-.uh-main {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 32px 24px 80px;
-}
+/* ====== HERO ====== */
 
-/* HERO */
 .uh-hero-section {
-  margin-top: 16px;
-  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
 }
 
 .uh-hero-card {
-  max-width: 2100px;
-  padding: 45px 65px 64px;
-  border-radius: 44px;
+  max-width: 1050px; /* kartani kengroq qildik */
+  width: 100%;
+  padding: 36px 56px 44px;
+  border-radius: 32px;
   background: radial-gradient(circle at top left, #018abe, #001b48 55%, #000c26);
   box-shadow: var(--uh-shadow-soft);
 }
@@ -158,155 +145,154 @@ button {
 .uh-pill {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  background: rgba(3, 164, 221, 0.15);
-  border-radius: 999px;
-  padding: 5px 14px;
-  border: 1px solid rgba(214, 235, 238, 0.4);
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: var(--uh-radius-pill);
+  background: rgba(0, 0, 0, 0.35);
   color: var(--uh-text-muted);
+  font-size: 13px;
+  margin-bottom: 18px;
 }
 
 .uh-hero-title {
-  margin: 16px 0 10px;
-  font-size: 34px;
+  margin: 0 0 12px;
+  font-size: 40px;
   line-height: 1.15;
-  letter-spacing: 0.03em;
 }
 
 .uh-hero-text {
-  font-size: 15px;
+  margin: 0 0 24px;
+  font-size: 16px;
+  max-width: 560px;
   color: var(--uh-text-muted);
-  max-width: 520px;
 }
 
 .uh-hero-actions {
-  margin-top: 22px;
   display: flex;
   gap: 14px;
-  flex-wrap: wrap;
 }
 
 /* BUTTONS */
+
 .uh-primary-btn,
 .uh-secondary-btn {
-  padding: 10px 22px;
-  border-radius: 999px;
-  font-size: 14px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease,
-    background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
+  padding: 10px 26px;
+  border-radius: var(--uh-radius-pill);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition:
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease,
+    color 0.2s ease;
 }
 
 .uh-primary-btn {
-  background: linear-gradient(135deg, #018abe, #97cadb);
-  color: #001b48;
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+  background: #018abe;
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
 }
 
 .uh-primary-btn:hover {
+  background: #019fd7;
   transform: translateY(-1px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.55);
 }
 
 .uh-secondary-btn {
   background: transparent;
-  border: 1px solid rgba(151, 202, 219, 0.6);
-  color: var(--uh-text-main);
+  color: var(--uh-extra-light);
+  border: 1px solid rgba(214, 235, 238, 0.5);
 }
 
 .uh-secondary-btn:hover {
-  background: rgba(1, 138, 190, 0.2);
-  border-color: var(--uh-cyan);
+  background: rgba(214, 235, 238, 0.08);
 }
 
-/* SECTION HEADERS */
+/* ====== SECTIONS ====== */
+
 .uh-section {
-  margin-top: 40px;
+  margin-top: 72px;
 }
 
 .uh-section-header {
-  margin-bottom: 20px;
+  max-width: 700px;
+  margin-bottom: 24px;
 }
 
 .uh-section-header h2 {
-  margin: 0 0 4px;
+  margin: 0 0 8px;
   font-size: 26px;
 }
 
 .uh-section-header p {
   margin: 0;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--uh-text-muted);
 }
 
 .uh-section-header--spaced {
-  margin-top: 28px;
+  margin-top: 40px;
 }
 
-/* TIMELINE (ABOUT) */
+/* ====== TIMELINE (ABOUT) – 3 ta karta: chap, markaz, o‘ng ====== */
+
 .uh-timeline {
-  position: relative;
-  margin: 28px 0 16px;
-  padding-top: 32px;
+  margin: 28px 0 10px;
 }
 
-.uh-timeline-track {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 88%;
-  width: 60%;
-  height: 3px;
-  border-radius: 999px;
-  background: rgba(214, 235, 238, 0.3);
-}
-
-.uh-timeline-cards {
+.uh-timeline-items-row {
   display: flex;
   justify-content: center;
+  align-items: flex-start;
+  gap: 32px;
+  min-height: 260px;
+}
+
+/* Har bir element – karta + pastdagi yozuvlar */
+.uh-timeline-item {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 24px;
-  min-height: 250px;
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
+  cursor: pointer;
 }
 
-.uh-timeline-card {
-  position: relative;
-  width: 280px;
-  height: 190px;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.45);
-  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
-  background: #001b48;
-}
-
-.uh-timeline-card--center {
+/* Markazdagi karta – kattaroq */
+.uh-timeline-item--center {
   transform: translateY(-6px) scale(1.05);
-  z-index: 3;
-  filter: blur(0);
   opacity: 1;
-}
-
-.uh-timeline-card--left,
-.uh-timeline-card--right {
-  transform: translateY(18px) scale(0.9);
-  filter: blur(2px);
-  opacity: 0.6;
   z-index: 2;
 }
 
-.uh-timeline-card--hidden {
-  transform: translateY(18px) scale(0.7);
-  filter: blur(3px);
-  opacity: 0;
-  pointer-events: none;
+/* Chap va o‘ng kartalar – biroz kichikroq */
+.uh-timeline-item--left,
+.uh-timeline-item--right {
+  transform: translateY(10px) scale(0.93);
+  opacity: 0.85;
+}
+
+/* Qolgan 2 ta slayd ko‘rinmasin */
+.uh-timeline-item--hidden {
+  display: none;
+}
+
+/* Karta rasmi */
+.uh-timeline-card {
+  width: 320px;
+  height: 190px;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.45);
+  background: #001b48;
 }
 
 .uh-timeline-img {
@@ -315,74 +301,84 @@ button {
   object-fit: cover;
 }
 
-.uh-timeline-caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 8px;
+/* Pastdagi chiziq + matn */
+.uh-timeline-meta {
+  margin-top: 12px;
   text-align: center;
-  color: var(--uh-text-main);
 }
 
-.uh-timeline-emoji {
-  font-size: 20px;
+.uh-timeline-line {
+  width: 80%;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(214, 235, 238, 0.7);
+  margin: 0 auto 6px;
 }
 
-.uh-timeline-title {
-  font-size: 15px;
+.uh-timeline-meta-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   font-weight: 600;
+  font-size: 16px;
 }
 
-.uh-timeline-date {
-  font-size: 12px;
+.uh-timeline-meta-emoji {
+  font-size: 18px;
+}
+
+.uh-timeline-meta-date {
+  margin-top: 4px;
+  font-size: 14px;
   color: var(--uh-text-muted);
 }
 
-.uh-timeline-dots {
-  margin-top: 26px;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
+/* markazdagi kattaroq chiziq va sarlavha */
+.uh-timeline-item--center .uh-timeline-card {
+  box-shadow: 0 22px 40px rgba(0, 0, 0, 0.55);
 }
 
-.uh-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  border: none;
-  background: rgba(214, 235, 238, 0.4);
-  cursor: pointer;
-  padding: 0;
+.uh-timeline-item--center .uh-timeline-meta-title {
+  font-size: 18px;
 }
 
-.uh-dot--active {
-  width: 28px;
-  background: var(--uh-cyan);
+.uh-timeline-item--center .uh-timeline-line {
+  background: var(--uh-extra-light);
 }
 
-/* WHY STUDENTS LOVE GRID */
+/* ====== WHY STUDENTS LOVE (BENEFITS) ====== */
+
 .uh-benefits-grid {
-  margin-top: 18px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 18px;
 }
 
 .uh-benefit-card {
-  background: radial-gradient(circle at top left, #02457a, #001b48);
-  border-radius: 20px;
-  padding: 16px 18px;
-  box-shadow: var(--uh-shadow-soft);
+  background: rgba(0, 10, 35, 0.9);
+  border-radius: 24px;
+  padding: 18px 16px 18px;
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.55);
+  border: 1px solid rgba(151, 202, 219, 0.25);
 }
 
 .uh-benefit-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  background: rgba(1, 138, 190, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
   font-size: 20px;
-  margin-bottom: 6px;
 }
 
 .uh-benefit-card h3 {
   margin: 0 0 6px;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .uh-benefit-card p {
@@ -391,13 +387,11 @@ button {
   color: var(--uh-text-muted);
 }
 
-/* CONTACT FORM */
+/* ====== CONTACT FORM ====== */
+
 .uh-contact-form {
-  max-width: 760px;
-  background: radial-gradient(circle at top left, #02457a, #001b48);
-  padding: 20px 22px 24px;
-  border-radius: 22px;
-  box-shadow: var(--uh-shadow-soft);
+  margin-top: 24px;
+  max-width: 720px;
 }
 
 .uh-contact-row {
@@ -409,21 +403,28 @@ button {
 .uh-input,
 .uh-textarea {
   width: 100%;
-  border-radius: 12px;
-  border: 1px solid rgba(214, 235, 238, 0.35);
-  background: rgba(0, 15, 45, 0.7);
-  color: var(--uh-text-main);
-  padding: 9px 11px;
+  border-radius: 16px;
+  border: 1px solid rgba(151, 202, 219, 0.35);
+  background: rgba(0, 12, 40, 0.85);
+  padding: 10px 14px;
+  color: var(--uh-text-primary);
   font-size: 14px;
+  outline: none;
 }
 
 .uh-input::placeholder,
 .uh-textarea::placeholder {
-  color: rgba(214, 235, 238, 0.7);
+  color: rgba(214, 235, 238, 0.6);
+}
+
+.uh-input:focus,
+.uh-textarea:focus {
+  border-color: var(--uh-accent);
+  box-shadow: 0 0 0 1px rgba(1, 138, 190, 0.6);
 }
 
 .uh-textarea {
-  min-height: 110px;
+  min-height: 120px;
   resize: vertical;
 }
 
@@ -432,44 +433,73 @@ button {
 }
 
 .uh-contact-links {
-  margin-top: 18px;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  margin-top: 18px;
 }
 
 .uh-chip {
-  padding: 7px 16px;
-  border-radius: 999px;
-  background: rgba(0, 20, 60, 0.9);
-  border: 1px solid rgba(151, 202, 219, 0.6);
+  padding: 8px 16px;
+  border-radius: var(--uh-radius-pill);
+  background: rgba(0, 10, 35, 0.9);
+  border: 1px solid rgba(151, 202, 219, 0.4);
   font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .uh-navbar-inner {
-    padding-inline: 16px;
-  }
+/* ====== RESPONSIVE ====== */
 
-  .uh-main {
-    padding-inline: 16px;
+@media (max-width: 960px) {
+  .uh-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .uh-hero-card {
-    padding-inline: 22px;
+    padding: 28px 20px 30px;
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .uh-navbar-inner {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    justify-content: space-between;
+  }
+
+  .uh-nav-links {
+    gap: 8px;
+  }
+
+  .uh-nav-pill span:last-child {
+    display: none; /* faqat iconlar qolishi mumkin */
+  }
+
+  .uh-main {
+    padding: 100px 16px 48px;
   }
 
   .uh-hero-title {
-    font-size: 26px;
+    font-size: 30px;
+  }
+
+  .uh-benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .uh-timeline-items-row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .uh-timeline-item--left,
+  .uh-timeline-item--right {
+    display: none;
+  }
+
+  .uh-timeline-card {
+    width: 280px;
+    height: 170px;
   }
 
   .uh-contact-row {
