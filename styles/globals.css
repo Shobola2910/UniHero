@@ -76,7 +76,7 @@ button {
 
 /* LOGO RASMI */
 .uh-logo-img {
-  height: 42px;
+  height: 70px;
   width: auto;
   display: block;
 }
@@ -148,9 +148,9 @@ button {
 }
 
 .uh-hero-card {
-  max-width: 900px;
-  padding: 28px 40px 36px;
-  border-radius: 30px;
+  max-width: 1050px;
+  padding: 36px 56px 44px;
+  border-radius: 32px;
   background: radial-gradient(circle at top left, #018abe, #001b48 55%, #000c26);
   box-shadow: var(--uh-shadow-soft);
 }
