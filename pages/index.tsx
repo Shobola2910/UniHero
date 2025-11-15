@@ -193,4 +193,159 @@ export default function HomePage() {
               </p>
             </div>
 
-            <div className="uh-t
+            <div className="uh-timeline">
+              <div className="uh-timeline-cards">
+                {timelineItems.map((item, idx) => (
+                  <div key={item.title} className={getTimelineCardClass(idx)}>
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="uh-timeline-img"
+                    />
+                    <div className="uh-timeline-caption">
+                      <div className="uh-timeline-emoji">{item.emoji}</div>
+                      <div className="uh-timeline-title">{item.title}</div>
+                      <div className="uh-timeline-date">{item.date}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="uh-timeline-track" />
+
+              <div className="uh-timeline-dots">
+                {timelineItems.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    className={
+                      idx === activeTimeline ? "uh-dot uh-dot--active" : "uh-dot"
+                    }
+                    onClick={() => setActiveTimeline(idx)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* WHY STUDENTS LOVE */}
+            <div className="uh-section uh-section-header--spaced">
+              <div className="uh-section-header">
+                <h2>Why students love UniHero</h2>
+                <p>Built around clarity, speed and a friendly vibe.</p>
+              </div>
+
+              <div className="uh-benefits-grid">
+                <div className="uh-benefit-card">
+                  <div className="uh-benefit-icon">📘</div>
+                  <h3>Clear guidance</h3>
+                  <p>No fluff — short, practical and exam-aligned.</p>
+                </div>
+                <div className="uh-benefit-card">
+                  <div className="uh-benefit-icon">🧠</div>
+                  <h3>Smart tools</h3>
+                  <p>Templates, checklists and quick planners.</p>
+                </div>
+                <div className="uh-benefit-card">
+                  <div className="uh-benefit-icon">⚡</div>
+                  <h3>Fast help</h3>
+                  <p>Ask on Telegram, get answers in minutes.</p>
+                </div>
+                <div className="uh-benefit-card">
+                  <div className="uh-benefit-icon">🎯</div>
+                  <h3>Student-first</h3>
+                  <p>Built by and for learners — friendly and simple.</p>
+                </div>
+                <div className="uh-benefit-card">
+                  <div className="uh-benefit-icon">⏰</div>
+                  <h3>24/7</h3>
+                  <p>Support availability when you need it.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* RESOURCES – hozircha faqat sarlavha (keyingi bosqichda modal va boshqasini qo‘shamiz) */}
+          <section id="resources" className="uh-section">
+            <div className="uh-section-header">
+              <h2>Resources</h2>
+              <p>
+                All your UniHero tools in one place: assignments, exam prep,
+                motivation, study guides and more.
+              </p>
+            </div>
+
+            {/* Bu yerda keyinroq design + modallarni qo‘shamiz */}
+          </section>
+
+          {/* CONTACT */}
+          <section id="contact" className="uh-section">
+            <div className="uh-section-header">
+              <h2>Contact</h2>
+              <p>
+                Have a question or want to leave a comment? Write to us and it
+                will be forwarded to the UniHero Telegram bot.
+              </p>
+            </div>
+
+            <form className="uh-contact-form" onSubmit={handleContactSubmit}>
+              <div className="uh-contact-row">
+                <input
+                  className="uh-input"
+                  placeholder="Full Name"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                />
+                <input
+                  className="uh-input"
+                  placeholder="Telegram Username"
+                  value={telegramUser}
+                  onChange={(e) => setTelegramUser(e.target.value)}
+                />
+              </div>
+              <textarea
+                className="uh-textarea"
+                placeholder="Comment"
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <button
+                type="submit"
+                className="uh-primary-btn uh-contact-submit"
+                disabled={sending}
+              >
+                {sending ? "Sending..." : "Submit"}
+              </button>
+            </form>
+
+            <div className="uh-contact-links">
+              <a
+                href="https://t.me/UniHero_news"
+                target="_blank"
+                rel="noreferrer"
+                className="uh-chip"
+              >
+                📣 UniHero_News
+              </a>
+              <a
+                href="https://t.me/UniHero_BOT"
+                target="_blank"
+                rel="noreferrer"
+                className="uh-chip"
+              >
+                🤖 UniHero BOT
+              </a>
+              <a
+                href="https://t.me/Unihero_admin"
+                target="_blank"
+                rel="noreferrer"
+                className="uh-chip"
+              >
+                👨🏻‍💻 Admin
+              </a>
+            </div>
+          </section>
+        </main>
+      </div>
+    </>
+  );
+}
