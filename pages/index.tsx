@@ -94,7 +94,6 @@ export default function HomePage() {
   // Timeline kartalarining classini hisoblash (chap / o‘rta / o‘ng / yashirin)
   const getTimelineItemClass = (index: number) => {
     if (index === activeTimeline) {
-      // markazdagi kattaroq slayd
       return "uh-timeline-item uh-timeline-item--center";
     }
 
@@ -103,26 +102,14 @@ export default function HomePage() {
     const next = (activeTimeline + 1) % timelineItems.length;
 
     if (index === prev) {
-      // chap slayd
       return "uh-timeline-item uh-timeline-item--left";
     }
     if (index === next) {
-      // o‘ng slayd
       return "uh-timeline-item uh-timeline-item--right";
     }
 
     // qolgan 2 ta slayd ko‘rinmasin
     return "uh-timeline-item uh-timeline-item--hidden";
-  };
-
-  const goPrevTimeline = () => {
-    setActiveTimeline(
-      (prev) => (prev - 1 + timelineItems.length) % timelineItems.length
-    );
-  };
-
-  const goNextTimeline = () => {
-    setActiveTimeline((prev) => (prev + 1) % timelineItems.length);
   };
 
   return (
@@ -215,69 +202,32 @@ export default function HomePage() {
 
             {/* TIMELINE */}
             <div className="uh-timeline">
-              <div className="uh-timeline-wrapper">
-                {/* Chap arrow */}
-                <button
-                  type="button"
-                  className="uh-timeline-arrow uh-timeline-arrow--left"
-                  onClick={goPrevTimeline}
-                  aria-label="Previous story"
-                >
-                  ‹
-                </button>
-
-                {/* Slaydlar qatori */}
-                <div className="uh-timeline-items-row">
-                  {timelineItems.map((item, idx) => (
-                    <div
-                      key={item.title}
-                      className={getTimelineItemClass(idx)}
-                      onClick={() => setActiveTimeline(idx)}
-                    >
-                      <div className="uh-timeline-card">
-                        <img
-                          src={item.img}
-                          alt={item.title}
-                          className="uh-timeline-img"
-                        />
-                      </div>
-
-                      <div className="uh-timeline-meta">
-                        <div className="uh-timeline-line" />
-                        <div className="uh-timeline-meta-title">
-                          <span className="uh-timeline-meta-emoji">
-                            {item.emoji}
-                          </span>
-                          <span>{item.title}</span>
-                        </div>
-                        <div className="uh-timeline-meta-date">{item.date}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* O‘ng arrow */}
-                <button
-                  type="button"
-                  className="uh-timeline-arrow uh-timeline-arrow--right"
-                  onClick={goNextTimeline}
-                  aria-label="Next story"
-                >
-                  ›
-                </button>
-              </div>
-
-              {/* Nuqtachalar */}
-              <div className="uh-timeline-dots">
-                {timelineItems.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    className={
-                      idx === activeTimeline ? "uh-dot uh-dot--active" : "uh-dot"
-                    }
+              <div className="uh-timeline-items-row">
+                {timelineItems.map((item, idx) => (
+                  <div
+                    key={item.title}
+                    className={getTimelineItemClass(idx)}
                     onClick={() => setActiveTimeline(idx)}
-                  />
+                  >
+                    <div className="uh-timeline-card">
+                      <img
+                        src={item.img}
+                        alt={item.title}
+                        className="uh-timeline-img"
+                      />
+                    </div>
+
+                    <div className="uh-timeline-meta">
+                      <div className="uh-timeline-line" />
+                      <div className="uh-timeline-meta-title">
+                        <span className="uh-timeline-meta-emoji">
+                          {item.emoji}
+                        </span>
+                        <span>{item.title}</span>
+                      </div>
+                      <div className="uh-timeline-meta-date">{item.date}</div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
@@ -328,7 +278,52 @@ export default function HomePage() {
                 motivation, study guides and more.
               </p>
             </div>
-            {/* Keyingi bosqichda bu yerga modallar va tugmalarni qo‘shamiz */}
+
+            <div className="uh-resources-layout">
+              {/* LEFT COLUMN */}
+              <div className="uh-resources-column">
+                <button className="uh-resource-pill">
+                  <span>Assignments</span>
+                  <span className="uh-resource-emoji">📚</span>
+                </button>
+                <button className="uh-resource-pill">
+                  <span>Motivation</span>
+                  <span className="uh-resource-emoji">🚀</span>
+                </button>
+                <button className="uh-resource-pill">
+                  <span>UniHero Hub</span>
+                  <span className="uh-resource-emoji">📨</span>
+                </button>
+              </div>
+
+              {/* CENTER LOGO */}
+              <div className="uh-resources-center">
+                <div className="uh-resources-logo-circle">
+                  {/* 3-rasmdagi logo – faylni public/images/unihero-mark.png qilib qo‘ying */}
+                  <img
+                    src="/images/unihero-mark.png"
+                    alt="UniHero mark"
+                    className="uh-resources-logo-img"
+                  />
+                </div>
+              </div>
+
+              {/* RIGHT COLUMN */}
+              <div className="uh-resources-column">
+                <button className="uh-resource-pill uh-resource-pill--right">
+                  <span>Exam Prep</span>
+                  <span className="uh-resource-emoji">📝</span>
+                </button>
+                <button className="uh-resource-pill uh-resource-pill--right">
+                  <span>Study Guides</span>
+                  <span className="uh-resource-emoji">📖</span>
+                </button>
+                <button className="uh-resource-pill uh-resource-pill--right">
+                  <span>Study Podcasts</span>
+                  <span className="uh-resource-emoji">🎧</span>
+                </button>
+              </div>
+            </div>
           </section>
 
           {/* CONTACT */}
